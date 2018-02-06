@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>kthknugarna</groupId>
-    <artifactId>unrut</artifactId>
+    <artifactId>iv1201project</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
 
-    <name>unrut</name>
+    <name>iv1201project</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
