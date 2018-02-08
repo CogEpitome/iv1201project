@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kthknugarna.unrut.view;
+package kthknugarna.iv1201project.view;
 
 /**
  *

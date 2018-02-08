@@ -6,5 +6,27 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
     
     <!--insert navigation rules here--> 
-    
+    <navigation-rule>
+    <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginView.LoginButton}</from-action>
+            <from-outcome>applicant</from-outcome>
+            <to-view-id>/applicants.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginView.LoginButton}</from-action>
+            <from-outcome>recruiter</from-outcome>
+            <to-view-id>/recruiters.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginView.LoginButton}</from-action>
+            <from-outcome>register</from-outcome>
+            <to-view-id>/register.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginView.LoginButton}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+   </navigation-rule>
 </faces-config>
