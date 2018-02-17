@@ -29,6 +29,8 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 
 @TransactionAttribute(TransactionAttributeType.MANDATORY)

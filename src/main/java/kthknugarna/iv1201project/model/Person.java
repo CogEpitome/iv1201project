@@ -28,6 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 @Entity
 @Table(name = "PERSON")

@@ -8,6 +8,8 @@ package kthknugarna.iv1201project.view;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 public class ApplicantView {
     
