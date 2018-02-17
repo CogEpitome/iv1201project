@@ -47,7 +47,6 @@ public class LoginView implements Serializable{
     public String loginButton(){
         try{
             startConversation();
-            application = new Application();
             String str = controller.login(username, password);
             return str;
         } catch (Exception e){

@@ -20,19 +20,17 @@ import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 public class LoginController {
     @EJB ApplicantDAO dao;
     
-    public String Login(ApplicationDTO application){
-        if(application.GetStatusId() == 1)
-            return getRole(1);
-        else
-            return "failure";
-    }
-    
     public String getRole(long id){
         return dao.getRole(id).getName();
     }
     
     public String login(String username, String password){
-        return "hej";
+        if(dao.getPerson(username) != null){
+            if(dao.getPerson(username).getUsername().equals(username));
+                return "Success!";
+        }
+        else
+        return "No user with that username exists";
     }
     
 }
