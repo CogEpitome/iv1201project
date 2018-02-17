@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kthknugarna.iv1201project.integration;
+package kthknugarna.iv1201project.model;
 
+import kthknugarna.iv1201project.model.CompetenceProfile;
+import kthknugarna.iv1201project.model.Availability;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
