@@ -5,6 +5,8 @@
  */
 package kthknugarna.iv1201project.integration;
 
+import kthknugarna.iv1201project.model.Role;
+import kthknugarna.iv1201project.model.Person;
 import static java.util.Collections.list;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -18,7 +20,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
-import kthknugarna.iv1201project.model.Application;
+import kthknugarna.iv1201project.model.Availability;
+import kthknugarna.iv1201project.model.Competence;
+import kthknugarna.iv1201project.model.CompetenceProfile;
 import kthknugarna.iv1201project.model.Input;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
@@ -42,6 +46,7 @@ public class ApplicantDAO {
         }
     }
     
+    
     public Person getPerson(String username){
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
         query.setParameter("username", username);
@@ -51,7 +56,23 @@ public class ApplicantDAO {
         else return null;
     }
     
+    public Person getPerson(long id){
+        return em.find(Person.class, id);
+    }
+    
+    public CompetenceProfile getCompetenceProfile(long id){
+        return em.find(CompetenceProfile.class, id);
+    }
+    
     public Role getRole(long id){
         return em.find(Role.class, id);
+    }
+    
+    public Competence getCompetence(long id){
+        return em.find(Competence.class, id);
+    }
+    
+    public Availability getAvailability(long id){
+        return em.find(Availability.class, id);
     }
 }
