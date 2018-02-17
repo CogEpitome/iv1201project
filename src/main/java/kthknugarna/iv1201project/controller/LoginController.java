@@ -31,8 +31,8 @@ public class LoginController {
         return dao.getRole(id).getName();
     }
     
-    public void Login(String username){
-        
+    public String login(String username, String password){
+        return "hej";
     }
     
 }
