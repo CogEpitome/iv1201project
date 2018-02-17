@@ -18,6 +18,8 @@ import kthknugarna.iv1201project.integration.ApplicantDAO;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 @Named("loginView")
 @ConversationScoped

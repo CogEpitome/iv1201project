@@ -4,6 +4,8 @@ package kthknugarna.iv1201project.model.dto;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 public interface InputDTO {
     /**                                     

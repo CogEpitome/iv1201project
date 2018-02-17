@@ -12,6 +12,8 @@ import kthknugarna.iv1201project.integration.ApplicantDAO;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless

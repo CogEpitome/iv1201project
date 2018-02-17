@@ -10,6 +10,8 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 public class Input implements InputDTO {
     

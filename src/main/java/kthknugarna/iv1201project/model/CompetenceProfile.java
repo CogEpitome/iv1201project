@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  */
 @Entity
 @Table(name = "COMPETENCE_PROFILE")

@@ -8,6 +8,8 @@ package kthknugarna.iv1201project.view;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
  * 
  * List applications
  * -List x (less than 1000 || default_value) apps based on time period, date, competence, name

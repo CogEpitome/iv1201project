@@ -15,6 +15,11 @@ import kthknugarna.iv1201project.controller.RegisterController;
 import kthknugarna.iv1201project.model.Input;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
+/**
+ * @author Jonas
+ * @author Anton
+ * @author Benjamin
+ */
 @Named("registerView")
 @ConversationScoped
 public class RegisterView implements Serializable{
