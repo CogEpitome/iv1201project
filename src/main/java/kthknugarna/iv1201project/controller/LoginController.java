@@ -8,8 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import kthknugarna.iv1201project.integration.ApplicantDAO;
-import kthknugarna.iv1201project.model.Application;
-import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 
 /**
  *

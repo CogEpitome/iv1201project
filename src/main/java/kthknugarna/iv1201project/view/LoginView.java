@@ -14,8 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import kthknugarna.iv1201project.controller.LoginController;
 import kthknugarna.iv1201project.integration.ApplicantDAO;
-import kthknugarna.iv1201project.model.Application;
-import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 
 /**
  *
@@ -26,7 +24,6 @@ import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 public class LoginView implements Serializable{
     @EJB
     private LoginController controller;
-    private ApplicationDTO application;
     private String username;
     private String password;
     @Inject
@@ -57,9 +54,6 @@ public class LoginView implements Serializable{
     
     public LoginController getLoginController(){
         return controller;
-    }
-    public ApplicationDTO getApplicationDTO(){
-        return application;
     }
     
     public String getUsername() {
