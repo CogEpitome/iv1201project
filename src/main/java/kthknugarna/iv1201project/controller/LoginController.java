@@ -24,8 +24,10 @@ public class LoginController {
     
     public String login(String username, String password){
         if(dao.getPerson(username) != null){
-            if(dao.getPerson(username).getUsername().equals(username));
+            if(dao.getPerson(username).getUsername().equals(username) && dao.getPerson(username).getPassword().equals(password))
                 return "Success!";
+            else
+                return "Username and password don't match.";
         }
         else
         return "No user with that username exists";
