@@ -21,6 +21,7 @@ public class LoginController {
     @EJB ApplicantDAO dao;
     
     public String Login(ApplicationDTO application){
+        dao.testStore();
         if(application.GetStatusId() == 1)
             return getRole(1);
         else
