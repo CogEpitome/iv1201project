@@ -15,9 +15,12 @@ import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 import kthknugarna.iv1201project.model.Application;
+import kthknugarna.iv1201project.model.Input;
+import kthknugarna.iv1201project.model.dto.InputDTO;
 
 /**
  *
@@ -30,12 +33,22 @@ public class ApplicantDAO {
     @PersistenceContext(unitName = "applicantPU")
     private EntityManager em;
 
-    public void testStore(){
+    public void testStore(InputDTO inputDTO){
         try{
-            em.persist(new Role((long)1, "recruiter"));
+            Person person = new Person((long)0, inputDTO.getFirstName(), inputDTO.getSurname(),"10", inputDTO.getPassword(), inputDTO.getUsername(), getRole(0));
+            em.persist(person);
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public Person getPerson(String username){
+        TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
+        query.setParameter("username", username);
+        List<Person> person = query.getResultList();
+        if(!person.isEmpty())
+        return person.get(0);
+        else return null;
     }
     
     public Role getRole(long id){
