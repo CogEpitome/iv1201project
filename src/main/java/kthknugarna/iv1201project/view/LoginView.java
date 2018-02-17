@@ -27,26 +27,28 @@ public class LoginView implements Serializable{
     @EJB
     private LoginController controller;
     private ApplicationDTO application;
+    private String username;
+    private String password;
     @Inject
     private Conversation conversation;
     
-    private void StartConversation() {
+    private void startConversation() {
         if (conversation.isTransient()) {
             conversation.begin();
         }
     }
 
-    private void StopConversation() {
+    private void stopConversation() {
         if (!conversation.isTransient()) {
             conversation.end();
         }
     }
     
-    public String LoginButton(){
+    public String loginButton(){
         try{
-            StartConversation();
+            startConversation();
             application = new Application();
-            String str = controller.Login(application);
+            String str = controller.login(username, password);
             return str;
         } catch (Exception e){
             System.out.println("WHOOOPSIEREE");
@@ -59,6 +61,22 @@ public class LoginView implements Serializable{
     }
     public ApplicationDTO getApplicationDTO(){
         return application;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import kthknugarna.iv1201project.integration.ApplicantDAO;
+import kthknugarna.iv1201project.integration.Person;
 import kthknugarna.iv1201project.model.Application;
 import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 
@@ -20,8 +21,7 @@ import kthknugarna.iv1201project.model.dto.ApplicationDTO;
 public class LoginController {
     @EJB ApplicantDAO dao;
     
-    public String Login(ApplicationDTO application){
-        dao.testStore();
+    public String login(ApplicationDTO application){
         if(application.GetStatusId() == 1)
             return getRole(1);
         else
@@ -32,8 +32,8 @@ public class LoginController {
         return dao.getRole(id).getName();
     }
     
-    public void Login(String username){
-        
+    public String login(String username, String password){
+        return username + " " + password;
     }
     
 }
