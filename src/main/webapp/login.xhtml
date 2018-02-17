@@ -10,10 +10,20 @@
 
         <h:form>
             <h3>Here ye be login</h3>
-            <p>
-                <h:commandButton value="Log in" action="#{loginView.LoginButton}"/>
-            </p>
-            <hr/>
+            <div class="container">
+                <p>
+                    <h:outputLabel for="holderFirstName" value="Account Holder's First Name: "/>
+                    <h:inputText id="holderFirstName" value="#{loginView.username}" required="true" requiredMessage="You have to enter a username stooped."/>
+                </p>
+                <p>
+                    <h:outputLabel for="holderLastName" value="Account Holder's Last Name: "/>
+                    <h:inputText id="holderLastName" value="#{loginView.password}" required="true" requiredMessage="You have to enter a password stooped."/>
+                </p>
+                <p>
+                    <h:commandButton value="Log in" action="#{loginView.LoginButton}"/>
+                </p>
+                <hr/>
+           </div>
         </h:form>
 
     </h:body>

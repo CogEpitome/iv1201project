@@ -92,13 +92,14 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
-    public Person(Long personId, String name, String surname, String ssn, String password, String username) {
+    public Person(Long personId, String name, String surname, String ssn, String password, String username, Role role) {
         this.personId = personId;
         this.name = name;
         this.surname = surname;
         this.ssn = ssn;
         this.password = password;
         this.username = username;
+        this.roleId = role;
     }
 
     public Long getPersonId() {
