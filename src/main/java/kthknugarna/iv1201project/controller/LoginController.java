@@ -8,6 +8,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import kthknugarna.iv1201project.integration.ApplicantDAO;
+import kthknugarna.iv1201project.model.Person;
+import kthknugarna.iv1201project.model.Role;
 
 /**
  *
@@ -34,6 +36,18 @@ public class LoginController {
         }
         else
         return false;
+    }
+    
+    private Person getPerson(String username){
+       return dao.getPerson(username);
+    }
+    
+    private Role getRole(Person person){
+        return person.getRoleId();
+    }
+    
+    public String GetRoleName(String username){
+        return getRole(getPerson(username)).getName();    
     }
     
 }

@@ -55,12 +55,13 @@ public class LoginView implements Serializable{
         
            // startConversation();
             boolean valid = controller.login(username, password);
+            String role;
             if(valid){
                 HttpSession session = SessionUtils.getSession();
                 
                 session.setAttribute("username", username);
-                //change applicant to role, create face for each case
-                return "applicant";
+                role = controller.GetRoleName(username);
+                return role;
             } else{
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect"
