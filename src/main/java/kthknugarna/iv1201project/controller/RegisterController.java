@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import kthknugarna.iv1201project.integration.ApplicantDAO;
 import kthknugarna.iv1201project.model.Person;
+import kthknugarna.iv1201project.model.VerificationHandler;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
 /**
@@ -21,14 +22,15 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
 @Stateless
 public class RegisterController {
     @EJB ApplicantDAO dao;
+    @EJB VerificationHandler verifier;
     
     public String register(InputDTO input){
-        dao.testStore(input);
-        Person person = getPerson(input.getUsername());
+        return verifier.verifyInput(input.getFirstName(), "String");
+        /*Person person = getPerson(input.getUsername());
         if(person != null)
             return person.getName();
         else
-            return "failure";
+            return "failure";*/
     }
     
     public Person getPerson(String username){
