@@ -8,7 +8,8 @@ package kthknugarna.iv1201project.model;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
 /**
- *
+ * The Input class handles the data provided by an applicant when they sign up. 
+ * 
  * @author Jonas
  * @author Anton
  * @author Benjamin

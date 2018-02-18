@@ -24,16 +24,16 @@ public class LoginController {
         return dao.getRole(id).getName();
     }
     
-    public String login(String username, String password){
+    public boolean login(String username, String password){
         if(dao.getPerson(username) != null){
             if(dao.getPerson(username).getUsername().equals(username) && dao.getPerson(username).getPassword().equals(password))
                 //log in the user
-                return "Success!";
+                return true;
             else
-                return "Username and password don't match.";
+                return false;
         }
         else
-        return "No user with that username exists.";
+        return false;
     }
     
 }

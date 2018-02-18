@@ -44,7 +44,7 @@ public class RegisterView implements Serializable{
 
     public String register(){
         startConversation();
-        input = new Input("<script>alert('test');</script>", "hedberg", "jonas@gmail.se", "0160939", "anbenjon", "gillarponnys");
+        input = new Input("anton", "hedberg", "jonas@gmail.se", "0160939", "anbenjon", "gillarponnys");
         return controller.register(input);
     }
     
