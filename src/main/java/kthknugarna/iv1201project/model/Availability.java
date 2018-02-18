@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * The Availability class represents an entity in the database.
  *
  * @author Jonas
  * @author Anton

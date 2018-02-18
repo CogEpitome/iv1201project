@@ -23,7 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * The Role class represents an entity in the database.
+ * 
  * @author Jonas
  * @author Anton
  * @author Benjamin
