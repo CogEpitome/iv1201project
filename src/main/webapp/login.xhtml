@@ -16,8 +16,7 @@
                     <h:inputText id="username" value="#{loginView.username}" required="true" requiredMessage="You have to enter a username stooped."/>
                 </p>
                 <p>
-                    <h:outputLabel for="password" value="Password: "/>
-                    <h:inputText id="password" value="#{loginView.password}" required="true" requiredMessage="You have to enter a password stooped."/>
+                  Password: <h:inputSecret value="#{loginView.password}" />
                 </p>
                 <p>
                     <h:commandButton value="Log in" action="#{loginView.validateUsernamePassword}"/>
@@ -25,6 +24,7 @@
                 <hr/>
            </div>
         </h:form>
+        <a href="register.xhtml">Create a new account</a>
 
     </h:body>
 </html>
