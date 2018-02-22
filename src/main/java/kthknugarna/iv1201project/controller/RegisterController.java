@@ -29,7 +29,7 @@ public class RegisterController {
         if(person != null)
             return "A user with the username :"+person.getUsername()+" already exists. Please try a different username.";
         else {
-            person = new Person((long)1, input.getFirstName(), input.getSurname(), input.getDateOfBirth(), input.getPassword(), input.getUsername(), dao.getRole(1));
+            person = new Person(input.getFirstName(), input.getSurname(), input.getDateOfBirth(), input.getPassword(), input.getUsername(), dao.getRole(1));
             dao.persist(person);
             return "success";
         }

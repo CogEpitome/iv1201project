@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -51,7 +53,7 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @NotNull
     @Column(name = "PERSON_ID")
     private Long personId;
@@ -97,8 +99,7 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
-    public Person(Long personId, String name, String surname, String ssn, String password, String username, Role role) {
-        this.personId = personId;
+    public Person(String name, String surname, String ssn, String password, String username, Role role) {
         this.name = name;
         this.surname = surname;
         this.ssn = ssn;

@@ -46,13 +46,18 @@ public class ApplicantDAO {
      */
     public void testStore(InputDTO inputDTO){
         try{
-            Person person = new Person((long)0, inputDTO.getFirstName(), inputDTO.getSurname(),"10", inputDTO.getPassword(), inputDTO.getUsername(), getRole(0));
+            Person person = new Person(inputDTO.getFirstName(), inputDTO.getSurname(),"10", inputDTO.getPassword(), inputDTO.getUsername(), getRole(0));
             em.persist(person);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
     
+    /**
+     * TODO: add exception handling.
+     * Method to persist an entity to the database.
+     * @param obj The object to persist
+     */
     public void persist(Object obj){
         try{
             em.persist(obj);
