@@ -25,12 +25,15 @@ public class RegisterController {
     @EJB VerificationHandler verifier;
     
     public String register(InputDTO input){
-        return verifier.verifyInput(input.getFirstName(), "String");
-        /*Person person = getPerson(input.getUsername());
+        Person person = getPerson(input.getUsername());
         if(person != null)
-            return person.getName();
-        else
-            return "failure";*/
+            return "A user with the username :"+person.getUsername()+" already exists. Please try a different username.";
+        else {
+            person = new Person((long)1, input.getFirstName(), input.getSurname(), input.getDateOfBirth(), input.getPassword(), input.getUsername(), dao.getRole(1));
+            dao.persist(person);
+            return "success";
+        }
+            
     }
     
     public Person getPerson(String username){

@@ -53,6 +53,13 @@ public class ApplicantDAO {
         }
     }
     
+    public void persist(Object obj){
+        try{
+            em.persist(obj);
+        } catch (Exception e){
+        }
+    }
+    
     /**
      * Returns a Person object for authentication. the username argument is entered 
      * from the client, and if the username exists the person that holds the 

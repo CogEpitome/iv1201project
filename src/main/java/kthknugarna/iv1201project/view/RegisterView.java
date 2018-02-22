@@ -44,7 +44,7 @@ public class RegisterView implements Serializable{
 
     public String register(){
         startConversation();
-        input = new Input("anton", "hedberg", "jonas@gmail.se", "0160939", "anbenjon", "gillarponnys");
+        input = new Input(firstName, surname, email, dateOfBirth, username, password);
         return controller.register(input);
     }
     
@@ -77,6 +77,34 @@ public class RegisterView implements Serializable{
 
     public String getPassword() {
         return password;
+    }
+
+    public void setInput(InputDTO input) {
+        this.input = input;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     

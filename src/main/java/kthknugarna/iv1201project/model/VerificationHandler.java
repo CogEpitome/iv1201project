@@ -8,6 +8,8 @@ package kthknugarna.iv1201project.model;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import kthknugarna.iv1201project.model.dto.InputDTO;
+import kthknugarna.iv1201project.model.exceptions.VerificationException;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.*;
 
@@ -20,12 +22,16 @@ import org.jsoup.safety.*;
 @Stateless
 public class VerificationHandler {
         
-    public String verifyInput(String in, String type){
+    public String verifyInput(String in, String type) throws VerificationException{
         if(inputIsType(in, type)){
             String safe = Jsoup.clean(in, Whitelist.basic());
-            return safe;
+            if(!safe.isEmpty()){
+                return safe; 
+            } else {
+                throw new VerificationException("Sanitized input returned empty.");
+            }
         } else {
-            return "The input does not match the required input type of "+type.toString();
+            throw new VerificationException("Invalid input type.");
         }
     }
     
@@ -42,6 +48,17 @@ public class VerificationHandler {
         } catch (NumberFormatException nfe){
             return false;
         }
+    }
+    
+    public InputDTO verifyInput(InputDTO in) throws VerificationException {
+        String safeFirstName = verifyInput(in.getFirstName(), "String");
+        String safeSurname = verifyInput(in.getSurname(), "String");
+        String safeEmail = verifyInput(in.getEmail(), "String");
+        String safeDateOfBirth = verifyInput(in.getDateOfBirth(), "String");
+        String safeUsername = verifyInput(in.getUsername(), "String");
+        String safePassword = verifyInput(in.getPassword(), "String");
+        InputDTO safeIn = new Input(safeFirstName, safeSurname, safeEmail, safeDateOfBirth, safeUsername, safePassword);
+        return safeIn; 
     }
     
 }

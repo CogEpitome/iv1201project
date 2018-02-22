@@ -9,12 +9,29 @@
         <h1>Register</h1>
 
         <h:form>
-            <h3>Here ye be registering</h3>
-            <p>
-                <h:commandButton value="Register" action="#{registerView.register}"/>
-            </p>
-            <hr/>
+            <h3>Here ye be register</h3>
+            <div class="container">
+                <p>
+                    <h:outputLabel for="firstName" value="First Name: "/>
+                    <h:inputText id="firstName" value="#{registerView.firstName}" required="true" requiredMessage="Please enter your first name."/>
+                    <h:outputLabel for="surname" value="Last Name: "/>
+                    <h:inputText id="surname" value="#{registerView.surname}" required="true" requiredMessage="Please enter your last name."/>
+                    <h:outputLabel for="email" value="Email: "/>
+                    <h:inputText id="email" value="#{registerView.email}" required="true" requiredMessage="Please enter your email address."/>
+                    <h:outputLabel for="dateOfBirth" value="Date of Birth: "/>
+                    <h:inputText id="dateOfBirth" value="#{registerView.dateOfBirth}" required="true" requiredMessage="Please enter your date of birth."/>
+                    <h:outputLabel for="username" value="Username: "/>
+                    <h:inputText id="username" value="#{registerView.username}" required="true" requiredMessage="Please enter a username."/>
+                    <h:outputLabel for="password" value="Password: "/>
+                    <h:inputText id="password" value="#{registerView.password}" required="true" requiredMessage="Please enter a password."/>
+                </p>
+                <p>
+                    <h:commandButton value="Register" action="#{registerView.register}"/>
+                </p>
+                <hr/>
+           </div>
         </h:form>
+        <a href="login.xhtml">Log in with an existing account</a>
 
     </h:body>
 </html>
