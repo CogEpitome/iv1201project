@@ -60,7 +60,7 @@ public class LoginView implements Serializable{
                 HttpSession session = SessionUtils.getSession();
                 
                 session.setAttribute("username", username);
-                role = controller.GetRoleName(username);
+                role = controller.getRoleName(username);
                 return role;
             } else{
                 FacesContext.getCurrentInstance().addMessage(null,
