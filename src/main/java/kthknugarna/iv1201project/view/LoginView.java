@@ -33,7 +33,7 @@ import kthknugarna.iv1201project.model.SessionUtils;
 public class LoginView implements Serializable{
     @EJB
     private LoginController controller;
-    private String username;
+    public String username;
     private String password;
     /*
     @Inject

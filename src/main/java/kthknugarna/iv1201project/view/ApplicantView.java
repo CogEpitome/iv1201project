@@ -9,8 +9,11 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import kthknugarna.iv1201project.controller.ApplicantController;
 import kthknugarna.iv1201project.model.Applicant;
 import kthknugarna.iv1201project.model.dto.ApplicantDTO;
@@ -22,6 +25,7 @@ import kthknugarna.iv1201project.model.dto.ApplicantDTO;
  * @author Benjamin
  */
 @ManagedBean
+@SessionScoped
 @Named("applicantView")
 public class ApplicantView implements Serializable{
     @EJB
@@ -47,9 +51,13 @@ public class ApplicantView implements Serializable{
     }
     
     public String apply(){
-        startConversation();
+        //startConversation();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        
+        String user = (String)session.getAttribute("username");
         //applicant = new Applicant("jaboki", areaOfExpertise, yearsOfExperience, availableFrom, availableTo);
-        applicant = new Applicant("jaboki", new int[] {0}, new int[] {1}, new String[] {"2018-09-19"}, new String[] {"2019-10-20"});
+        applicant = new Applicant(user, new int[] {0}, new int[] {1}, new String[] {"2018-09-19"}, new String[] {"2019-10-20"});
         return controller.apply(applicant);
     }
 
