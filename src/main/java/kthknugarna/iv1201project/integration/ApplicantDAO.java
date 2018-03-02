@@ -24,6 +24,7 @@ import kthknugarna.iv1201project.model.Availability;
 import kthknugarna.iv1201project.model.Competence;
 import kthknugarna.iv1201project.model.CompetenceProfile;
 import kthknugarna.iv1201project.model.Input;
+import kthknugarna.iv1201project.model.Status;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
 /**
@@ -135,5 +136,16 @@ public class ApplicantDAO {
      */
     public Availability getAvailability(long id){
         return em.find(Availability.class, id);
+    }
+    
+    /**
+     * Returns an Availability object for recruiting purposes. The id argument
+     * refers to the id of a person.
+     * @param id the id of Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
+    public Status getStatus(long id){
+        return em.find(Status.class, id);
     }
 }

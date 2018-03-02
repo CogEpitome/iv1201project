@@ -6,10 +6,12 @@
 package kthknugarna.iv1201project.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,20 +42,18 @@ public class Availability implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @NotNull
     @Column(name = "AVAILABILITY_ID")
     private Long availabilityId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "FROM_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date fromDate;
+    private String fromDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TO_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date toDate;
+    private String toDate;
     @JoinColumn(name = "PERSON_ID", referencedColumnName = "PERSON_ID")
     @ManyToOne(optional = false)
     private Person personId;
@@ -65,8 +65,7 @@ public class Availability implements Serializable {
         this.availabilityId = availabilityId;
     }
 
-    public Availability(Long availabilityId, Date fromDate, Date toDate) {
-        this.availabilityId = availabilityId;
+    public Availability(String fromDate, String toDate) {
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
@@ -79,19 +78,19 @@ public class Availability implements Serializable {
         this.availabilityId = availabilityId;
     }
 
-    public Date getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(Date fromDate) {
+    public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
-    public Date getToDate() {
+    public String getToDate() {
         return toDate;
     }
 
-    public void setToDate(Date toDate) {
+    public void setToDate(String toDate) {
         this.toDate = toDate;
     }
 

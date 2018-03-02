@@ -9,13 +9,17 @@ import kthknugarna.iv1201project.model.Competence;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,9 +40,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
 public class CompetenceProfile implements Serializable {
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competenceProfileId")
+    private Application application;
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @NotNull
     @Column(name = "COMPETENCE_PROFILE_ID")
     private Long competenceProfileId;
@@ -61,8 +68,8 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
-    public CompetenceProfile(Long competenceProfileId, BigDecimal yearsOfExperience) {
-        this.competenceProfileId = competenceProfileId;
+    public CompetenceProfile(Competence competenceId, BigDecimal yearsOfExperience) {
+        this.competenceId = competenceId;
         this.yearsOfExperience = yearsOfExperience;
     }
 
@@ -121,6 +128,14 @@ public class CompetenceProfile implements Serializable {
     @Override
     public String toString() {
         return "kthknugarna.iv1201project.controller.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";
+    }
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
     }
     
 }

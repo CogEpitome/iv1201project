@@ -5,10 +5,14 @@ X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Person.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\CompetenceProfile.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Role.java
+X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Applicant.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\dto\InputDTO.java
+X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\controller\ApplicantController.java
+X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Status.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\controller\LoginController.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\controller\RegisterController.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\view\RecruiterView.java
+X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Application.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\Availability.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\view\RegisterView.java
 X:\NetbeansProjects\iv1201project\src\main\java\kthknugarna\iv1201project\model\SessionUtils.java

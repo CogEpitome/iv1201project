@@ -5,12 +5,102 @@
  */
 package kthknugarna.iv1201project.view;
 
+import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
+import kthknugarna.iv1201project.controller.ApplicantController;
+import kthknugarna.iv1201project.model.Applicant;
+import kthknugarna.iv1201project.model.dto.ApplicantDTO;
+
 /**
  *
  * @author Jonas
  * @author Anton
  * @author Benjamin
  */
-public class ApplicantView {
+@ManagedBean
+@Named("applicantView")
+public class ApplicantView implements Serializable{
+    @EJB
+    private ApplicantController controller;
+    private ApplicantDTO applicant;
+    private int[] areaOfExpertise;
+    private int[] yearsOfExperience;
+    private String[] availableFrom;
+    private String[] availableTo;
+    @Inject
+    private Conversation conversation;
+    
+    private void startConversation() {
+        if (conversation.isTransient()) {
+            conversation.begin();
+        }
+    }
+
+    private void stopConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+    }
+    
+    public String apply(){
+        startConversation();
+        //applicant = new Applicant("jaboki", areaOfExpertise, yearsOfExperience, availableFrom, availableTo);
+        applicant = new Applicant("jaboki", new int[] {0}, new int[] {1}, new String[] {"2018-09-19"}, new String[] {"2019-10-20"});
+        return controller.apply(applicant);
+    }
+
+    public ApplicantController getController() {
+        return controller;
+    }
+
+    public void setController(ApplicantController controller) {
+        this.controller = controller;
+    }
+
+    public ApplicantDTO getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(ApplicantDTO applicant) {
+        this.applicant = applicant;
+    }
+
+    public int[] getAreaOfExpertise() {
+        return areaOfExpertise;
+    }
+
+    public void setAreaOfExpertise(int[] areaOfExpertise) {
+        this.areaOfExpertise = areaOfExpertise;
+    }
+
+    public int[] getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
+    public void setYearsOfExperience(int[] yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
+    public String[] getAvailableFrom() {
+        return availableFrom;
+    }
+
+    public void setAvailableFrom(String[] availableFrom) {
+        this.availableFrom = availableFrom;
+    }
+
+    public String[] getAvailableTo() {
+        return availableTo;
+    }
+
+    public void setAvailableTo(String[] availableTo) {
+        this.availableTo = availableTo;
+    }
+    
+    
     
 }
