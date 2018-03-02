@@ -9,9 +9,7 @@
 <h:body>
     <h:form>
         <p>Welcome #{loginView.username}</p>
-        <p>
-            <h:commandButton value="Apply" action="#{recruiterView.getApplication}"/>
-        </p>
+        <h:commandLink action="#{loginView.logout}" value="Logout"></h:commandLink>
     </h:form>
 </h:body>
 </html>

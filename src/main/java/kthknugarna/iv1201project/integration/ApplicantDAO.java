@@ -20,8 +20,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
-import kthknugarna.iv1201project.model.Applicant;
-import kthknugarna.iv1201project.model.Application;
 import kthknugarna.iv1201project.model.Availability;
 import kthknugarna.iv1201project.model.Competence;
 import kthknugarna.iv1201project.model.CompetenceProfile;
@@ -149,16 +147,5 @@ public class ApplicantDAO {
      */
     public Status getStatus(long id){
         return em.find(Status.class, id);
-    }
-    
-    /**
-     * Returns an Availability object for recruiting purposes. The id argument
-     * refers to the id of a person.
-     * @param id the id of Person
-     * @return   the availability period of an applicant
-     * @see      Availability
-     */
-    public Application getApplication(long id){
-        return em.find(Application.class, id);
     }
 }

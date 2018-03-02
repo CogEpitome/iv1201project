@@ -1,16 +1,19 @@
-Fri Mar 02 22:04:53 CET 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Fri Mar 02 20:18:43 CET 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Fri Mar 02 22:04:53 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0161-e888-2ba0-00007ca465cf 
-on database directory X:\NetbeansProjects\iv1201project\database\applicantDB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
-Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_161/db/lib/derby.jar
+Fri Mar 02 20:18:43 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0161-e826-e671-00003535d753 
+on database directory C:\Users\Anton\Documents\GitHub\iv1201project\database\applicantDB with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_65/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_161-b12
-user.dir=C:\Program Files\Java\jdk1.8.0_161\db
+java.runtime.version=1.8.0_65-b17
+user.dir=C:\Program Files\Java\jdk1.8.0_65\db
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=X:\NetbeansProjects\iv1201project\database
+derby.system.home=C:\Users\Anton\Documents\GitHub\iv1201project\database
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Fri Mar 02 22:38:26 CET 2018: Shutting down Derby engine
+Fri Mar 02 20:38:59 CET 2018: Shutting down Derby engine
+----------------------------------------------------------------
+Fri Mar 02 20:38:59 CET 2018:
+Shutting down instance a816c00e-0161-e826-e671-00003535d753 on database directory C:\Users\Anton\Documents\GitHub\iv1201project\database\applicantDB with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
