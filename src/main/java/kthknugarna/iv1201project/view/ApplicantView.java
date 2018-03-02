@@ -35,23 +35,9 @@ public class ApplicantView implements Serializable{
     private int[] yearsOfExperience;
     private String[] availableFrom;
     private String[] availableTo;
-    @Inject
-    private Conversation conversation;
-    
-    private void startConversation() {
-        if (conversation.isTransient()) {
-            conversation.begin();
-        }
-    }
 
-    private void stopConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-    }
     
     public String apply(){
-        //startConversation();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
         
