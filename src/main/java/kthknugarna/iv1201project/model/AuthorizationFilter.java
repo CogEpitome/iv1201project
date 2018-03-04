@@ -7,7 +7,6 @@ package kthknugarna.iv1201project.model;
 
 import java.io.IOException;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -24,7 +23,7 @@ import kthknugarna.iv1201project.controller.LoginController;
  *
  * @author Anton
  */
-    @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthorizationFilter implements Filter {
     @EJB
     private LoginController con;
@@ -50,7 +49,9 @@ public class AuthorizationFilter implements Filter {
            // if (reqURI.contains("/applicants.xhtml") && !con.GetRoleName((String)ses.getAttribute("username")).equals("applicant")) {
              //   resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
             //}
-            
+            if(ses == null){
+                if(reqURI.contains("/login.xhtml")) chain.doFilter(request,response);
+            }
             if ((reqURI.contains("/login.xhtml") && ses.getAttribute("username") == null)
                 //|| (ses != null && ses.getAttribute("username") != null)
                // || reqURI.indexOf("/public/") >= 0

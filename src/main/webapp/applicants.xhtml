@@ -11,27 +11,25 @@
         <p>Welcome #{loginView.username}</p>
         <h:commandLink action="#{loginView.logout}" value="Logout"></h:commandLink>
         
-        <h3>Here ye be register</h3>
+        <h3>Here ye be applying</h3>
             <div class="container">
-                <!--<p>
-                    <h:outputLabel for="firstName" value="First Name: "/>
-                    <h:inputText id="firstName" value="#{registerView.firstName}" required="true" requiredMessage="Please enter your first name."/>
-                    <h:outputLabel for="surname" value="Last Name: "/>
-                    <h:inputText id="surname" value="#{registerView.surname}" required="true" requiredMessage="Please enter your last name."/>
-                    <h:outputLabel for="email" value="Email: "/>
-                    <h:inputText id="email" value="#{registerView.email}" required="true" requiredMessage="Please enter your email address."/>
-                    <h:outputLabel for="dateOfBirth" value="Date of Birth: "/>
-                    <h:inputText id="dateOfBirth" value="#{registerView.dateOfBirth}" required="true" requiredMessage="Please enter your date of birth."/>
-                    <h:outputLabel for="username" value="Username: "/>
-                    <h:inputText id="username" value="#{registerView.username}" required="true" requiredMessage="Please enter a username."/>
-                    <h:outputLabel for="password" value="Password: "/>
-                    <h:inputText id="password" value="#{registerView.password}" required="true" requiredMessage="Please enter a password."/>
-                </p>-->
                 <p>
                     <h:commandButton value="Apply" action="#{applicantView.apply}"/>
                 </p>
                 <hr/>
            </div>
     </h:form>
+    
+    <h:form>
+        Previous occupation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years of experience, e.g. 3.5 years
+        <h:dataTable value="#{applicantView.items}" var="item">
+            <h:column><h:inputText value="#{item.value}" /></h:column>
+            <h:column><h:inputText value="#{item.experience}" /></h:column>
+            <h:column><h:commandButton value="remove" action="#{applicantView.remove(item)}" /></h:column>
+        </h:dataTable>
+        <h:commandButton value="Add competence" action="#{applicantView.add}" />
+        <h:commandButton value="Send" action="#{applicantView.save}" />
+    </h:form>
+    
 </h:body>
 </html>

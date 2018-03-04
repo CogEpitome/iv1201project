@@ -127,6 +127,10 @@ public class ApplicantDAO {
         return em.find(Competence.class, id);
     }
     
+    public Competence getCompetence(String name){
+        return em.find(Competence.class, name);
+    }
+    
     /**
      * Returns an Availability object for recruiting purposes. The id argument
      * refers to the id of a person.

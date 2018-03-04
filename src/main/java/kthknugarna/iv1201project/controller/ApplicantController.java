@@ -64,7 +64,14 @@ public class ApplicantController {
 
             return "success";
         }
-            
+    }
+    
+    public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience){
+        Competence comp = new Competence(competenceName);
+        dao.persist(comp);
+        CompetenceProfile cp = new CompetenceProfile(comp, yearsOfExperience);
+        cp.setPersonId(getPerson(username));
+        dao.persist(cp);
     }
     
     public Person getPerson(String username){
@@ -78,4 +85,7 @@ public class ApplicantController {
         return dao.getCompetence(id);
     }
     
+    public Competence getCompetence(String name){
+        return dao.getCompetence(name);
+    }
 }
