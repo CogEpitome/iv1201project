@@ -67,8 +67,14 @@ public class ApplicantController {
     }
     
     public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience){
-        Competence comp = new Competence(competenceName);
-        dao.persist(comp);
+        Competence comp;
+        if(getCompetence(competenceName) == null){
+            comp = new Competence(competenceName);
+            dao.persist(comp);
+        }
+        else
+            comp = getCompetence(competenceName);
+        
         CompetenceProfile cp = new CompetenceProfile(comp, yearsOfExperience);
         cp.setPersonId(getPerson(username));
         dao.persist(cp);

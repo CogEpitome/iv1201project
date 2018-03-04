@@ -39,8 +39,8 @@ public class ApplicantView implements Serializable{
     private ApplicantDTO applicant;
     private int[] areaOfExpertise;
     private int[] yearsOfExperience;
-    private String[] availableFrom;
-    private String[] availableTo;
+    private String availableFrom;
+    private String availableTo;
     
     private List<Item> items;
     
@@ -86,19 +86,19 @@ public class ApplicantView implements Serializable{
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    public String[] getAvailableFrom() {
+    public String getAvailableFrom() {
         return availableFrom;
     }
 
-    public void setAvailableFrom(String[] availableFrom) {
+    public void setAvailableFrom(String availableFrom) {
         this.availableFrom = availableFrom;
     }
 
-    public String[] getAvailableTo() {
+    public String getAvailableTo() {
         return availableTo;
     }
 
-    public void setAvailableTo(String[] availableTo) {
+    public void setAvailableTo(String availableTo) {
         this.availableTo = availableTo;
     }
     
@@ -128,6 +128,7 @@ public class ApplicantView implements Serializable{
             //System.out.println(user + " " + items.get(i).getValue() + " " + BigDecimal.valueOf(items.get(i).getExperience()));
             i++;
         }
+        System.out.println(getAvailableFrom() + " " + getAvailableTo());
     }
 
     public List<Item> getItems() {

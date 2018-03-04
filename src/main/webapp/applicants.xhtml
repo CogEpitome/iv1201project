@@ -28,6 +28,12 @@
             <h:column><h:commandButton value="remove" action="#{applicantView.remove(item)}" /></h:column>
         </h:dataTable>
         <h:commandButton value="Add competence" action="#{applicantView.add}" />
+        
+        <h:outputLabel for="availableFrom" value="Available from: "/>
+        <h:inputText id="availableFrom" value="#{applicantView.availableFrom}"/>
+        <h:outputLabel for="availableTo" value="Available until: "/>
+        <h:inputText id="availableTo" value="#{applicantView.availableTo}"/>
+                   
         <h:commandButton value="Send" action="#{applicantView.save}" />
     </h:form>
     

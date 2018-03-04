@@ -128,7 +128,12 @@ public class ApplicantDAO {
     }
     
     public Competence getCompetence(String name){
-        return em.find(Competence.class, name);
+        TypedQuery<Competence> query = em.createNamedQuery("Competence.findByName", Competence.class);
+        query.setParameter("name", name);
+        List<Competence> competence = query.getResultList();
+        if(!competence.isEmpty())
+        return competence.get(0);
+        else return null;
     }
     
     /**
