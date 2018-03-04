@@ -13,9 +13,6 @@
         
         <h3>Here ye be applying</h3>
             <div class="container">
-                <p>
-                    <h:commandButton value="Apply" action="#{applicantView.apply}"/>
-                </p>
                 <hr/>
            </div>
     </h:form>
@@ -28,11 +25,13 @@
             <h:column><h:commandButton value="remove" action="#{applicantView.remove(item)}" /></h:column>
         </h:dataTable>
         <h:commandButton value="Add competence" action="#{applicantView.add}" />
-        
+        <br></br><br></br>
         <h:outputLabel for="availableFrom" value="Available from: "/>
         <h:inputText id="availableFrom" value="#{applicantView.availableFrom}"/>
+        <br></br><br></br>
         <h:outputLabel for="availableTo" value="Available until: "/>
         <h:inputText id="availableTo" value="#{applicantView.availableTo}"/>
+        <br></br><br></br>
                    
         <h:commandButton value="Send" action="#{applicantView.save}" />
     </h:form>

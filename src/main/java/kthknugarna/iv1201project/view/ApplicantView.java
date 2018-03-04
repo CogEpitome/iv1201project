@@ -44,7 +44,7 @@ public class ApplicantView implements Serializable{
     
     private List<Item> items;
     
-    public String apply(){
+  /*  public String apply(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
         
@@ -52,7 +52,7 @@ public class ApplicantView implements Serializable{
         //applicant = new Applicant("jaboki", areaOfExpertise, yearsOfExperience, availableFrom, availableTo);
         applicant = new Applicant(user, new int[] {0}, new int[] {1}, new String[] {"2018-09-19"}, new String[] {"2019-10-20"});
         return controller.apply(applicant);
-    }
+    }*/
 
     public ApplicantController getController() {
         return controller;
@@ -129,6 +129,8 @@ public class ApplicantView implements Serializable{
             i++;
         }
         System.out.println(getAvailableFrom() + " " + getAvailableTo());
+        applicant = new Applicant(user, availableFrom, availableTo);
+        controller.createApplication(applicant);
     }
 
     public List<Item> getItems() {

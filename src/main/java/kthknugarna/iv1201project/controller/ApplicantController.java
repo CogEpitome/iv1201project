@@ -31,7 +31,7 @@ public class ApplicantController {
     @EJB ApplicantDAO dao;
     @EJB VerificationHandler verifier;
     
-    public String apply(ApplicantDTO applicant){
+    /*public String apply(ApplicantDTO applicant){
         Person person = getPerson(applicant.getUserName());
         if(person == null)
             return "Error:  A user with this id could not be found.";
@@ -64,6 +64,18 @@ public class ApplicantController {
 
             return "success";
         }
+    }*/
+    public void createApplication(ApplicantDTO applicant){
+        Person person = getPerson(applicant.getUserName());
+        Application app = new Application();
+        app.setPersonId(person);
+        app.setStatusId(dao.getStatus((long)0));
+        dao.persist(app);
+        String from = applicant.getAvailableFrom();
+        String to = applicant.getAvailableTo();
+        Availability availability = new Availability(from, to);
+        availability.setPersonId(person);
+        dao.persist(availability);
     }
     
     public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience){

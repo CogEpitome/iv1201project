@@ -48,6 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByUsername", query = "SELECT p FROM Person p WHERE p.username = :username")})
 public class Person implements Serializable {
 
+    @OneToMany(mappedBy = "personId")
+    private Collection<Application> applicationCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<CompetenceProfile> competenceProfileCollection;
 
@@ -213,6 +216,15 @@ public class Person implements Serializable {
 
     public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
         this.competenceProfileCollection = competenceProfileCollection;
+    }
+
+    @XmlTransient
+    public Collection<Application> getApplicationCollection() {
+        return applicationCollection;
+    }
+
+    public void setApplicationCollection(Collection<Application> applicationCollection) {
+        this.applicationCollection = applicationCollection;
     }
     
 }
