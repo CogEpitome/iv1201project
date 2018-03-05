@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
@@ -19,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import kthknugarna.iv1201project.controller.RecruiterController;
 import kthknugarna.iv1201project.controller.RegisterController;
 import kthknugarna.iv1201project.model.Application;
+import kthknugarna.iv1201project.model.Availability;
+import kthknugarna.iv1201project.model.CompetenceProfile;
 import kthknugarna.iv1201project.model.Input;
+import kthknugarna.iv1201project.model.Person;
 import kthknugarna.iv1201project.model.dto.ApplicationInfoDTO;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
@@ -44,27 +42,23 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
 @SessionScoped
 @Named("recruiterView")
 public class RecruiterView implements Serializable{
+    private final String SEARCHPARAM_TIME = "time";
+    private final String SEARCHPARAM_COMPETENCE = "competence";
+    private final String SEARCHPARAM_NAME = "name";
     @EJB
     private RecruiterController controller;
     private InputDTO input;
-    private List<ApplicationInfoDTO> applications;
+    private List<ApplicationInfoDTO> applications, filteredApplications;
+    private String searchFromTime, searchToTime, searchCompetence, searchName;
+    private String searchParameter;
     
-<<<<<<< HEAD
-=======
     /**
      * Gets a list of ApplicationInfo objects from data in the database and stores it in memory.
      * 
      * @return          an appropriate String message.
      */
->>>>>>> localJonas
     public String getApplications(){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        String user = (String)session.getAttribute("username");
         applications = controller.getApplicationInfoList();
-<<<<<<< HEAD
-        return "List size: "+applications.size();
-=======
         return applications.toString();
     }
 
@@ -167,6 +161,5 @@ public class RecruiterView implements Serializable{
             }
         }
             
->>>>>>> localJonas
     }
 }
