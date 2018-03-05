@@ -127,6 +127,15 @@ public class ApplicantDAO {
         return em.find(Competence.class, id);
     }
     
+    public Competence getCompetence(String name){
+        TypedQuery<Competence> query = em.createNamedQuery("Competence.findByName", Competence.class);
+        query.setParameter("name", name);
+        List<Competence> competence = query.getResultList();
+        if(!competence.isEmpty())
+        return competence.get(0);
+        else return null;
+    }
+    
     /**
      * Returns an Availability object for recruiting purposes. The id argument
      * refers to the id of a person.

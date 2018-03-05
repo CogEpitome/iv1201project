@@ -16,14 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jonas
+ * @author Anton
  */
 @Entity
 @Table(name = "APPLICATION")
@@ -39,9 +38,9 @@ public class Application implements Serializable {
     @NotNull
     @Column(name = "APPLICATION_ID")
     private Long applicationId;
-    @JoinColumn(name = "COMPETENCE_PROFILE_ID", referencedColumnName = "COMPETENCE_PROFILE_ID")
-    @OneToOne(optional = false)
-    private CompetenceProfile competenceProfileId;
+    @JoinColumn(name = "PERSON_ID", referencedColumnName = "PERSON_ID")
+    @ManyToOne
+    private Person personId;
     @JoinColumn(name = "STATUS_ID", referencedColumnName = "STATUS_ID")
     @ManyToOne(optional = false)
     private Status statusId;
@@ -49,9 +48,8 @@ public class Application implements Serializable {
     public Application() {
     }
 
-    public Application(CompetenceProfile competenceProfileId, Status statusId) {
-        this.competenceProfileId = competenceProfileId;
-        this.statusId = statusId;
+    public Application(Long applicationId) {
+        this.applicationId = applicationId;
     }
 
     public Long getApplicationId() {
@@ -62,12 +60,12 @@ public class Application implements Serializable {
         this.applicationId = applicationId;
     }
 
-    public CompetenceProfile getCompetenceProfileId() {
-        return competenceProfileId;
+    public Person getPersonId() {
+        return personId;
     }
 
-    public void setCompetenceProfileId(CompetenceProfile competenceProfileId) {
-        this.competenceProfileId = competenceProfileId;
+    public void setPersonId(Person personId) {
+        this.personId = personId;
     }
 
     public Status getStatusId() {

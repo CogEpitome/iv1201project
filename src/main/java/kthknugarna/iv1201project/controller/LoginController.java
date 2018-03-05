@@ -46,7 +46,7 @@ public class LoginController {
         return person.getRoleId();
     }
     
-    public String GetRoleName(String username){
+    public String getRoleName(String username){
         return getRole(getPerson(username)).getName();    
     }
     

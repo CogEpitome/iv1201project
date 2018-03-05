@@ -40,8 +40,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
 public class CompetenceProfile implements Serializable {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competenceProfileId")
-    private Application application;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -130,12 +128,4 @@ public class CompetenceProfile implements Serializable {
         return "kthknugarna.iv1201project.controller.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";
     }
 
-    public Application getApplication() {
-        return application;
     }
-
-    public void setApplication(Application application) {
-        this.application = application;
-    }
-    
-}
