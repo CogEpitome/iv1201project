@@ -51,13 +51,19 @@ public class RecruiterController {
         ApplicationInfoDTO dto = new ApplicationInfo(application.getApplicationId(), aList, cList, person, application.getStatusId());
         return dto;
     }
-
     
     private List<Availability> getAvailabilityList(Person person){
         return dao.getAvailabilityList(person);
     }
     private List<CompetenceProfile> getCompetenceProfileList(Person person){
         return dao.getCompetenceProfileList(person);
+    }
+    
+    public void setStatus(long applicationId, long statusId){
+        Application app = dao.getApplication(applicationId);
+        Status stat = dao.getStatus(statusId);
+        app.setStatusId(stat);
+        dao.persist(app);
     }
     
     public Person getPerson(long id){
