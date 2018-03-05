@@ -68,6 +68,15 @@ public class ApplicantDAO {
         }
     }
     
+    /**
+     * Returns a Person object for authentication. the username argument is entered 
+     * from the client, and if the username exists the person that holds the 
+     * username is returned. If no person has the username, the method 
+     * returns null.
+     * @param username the chosen name of a registered user
+     * @return         the person with the specified username
+     * @see            Person
+     */
     public Person getPerson(String username){
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
         query.setParameter("username", username);
@@ -76,19 +85,46 @@ public class ApplicantDAO {
         return person.get(0);
         else return null;
     }
-
+    /**
+     * Returns a Person object based on a personId. the id argument matches the
+     * personId of a competence profile.
+     * @param id personId belonging to a competenceProfile
+     * @return   the person with the specified id
+     * @see      Person
+     */
     public Person getPerson(long id){
         return em.find(Person.class, id);
     }
     
+    /**
+     * Returns a competenceProfile object for recruiting purposes. The id
+     * argument is the id of the profile to retrieve.
+     * @param id the id of the competence profile
+     * @return   the competence profile with specified id
+     * @see      CompetenceProfile
+     */
     public CompetenceProfile getCompetenceProfile(long id){
         return em.find(CompetenceProfile.class, id);
     }
-
+    /**
+     * Returns a Role object for web navigation and verification of users.
+     * The id argument is either 1 or 0, which corresponds to recruiter or 
+     * applicant.
+     * @param id the id of a role
+     * @return   the role with the specified id
+     * @see      Role
+     */
     public Role getRole(long id){
         return em.find(Role.class, id);
     }
-
+    
+    /**
+     * Returns a Competence object to retrieve the name of a competence tied
+     * to a specified id. The id argument is the id of the requested competence.
+     * @param id the id of a Competence
+     * @return   the competence with the specified id
+     * @see      Competence
+     */
     public Competence getCompetence(long id){
         return em.find(Competence.class, id);
     }
@@ -101,31 +137,73 @@ public class ApplicantDAO {
         return competence.get(0);
         else return null;
     }
-
+    
+    /**
+     * Returns an Availability object for recruiting purposes. The id argument
+     * refers to the id of a person.
+     * @param id the id of Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
     public Availability getAvailability(long id){
         return em.find(Availability.class, id);
     }
-
+    
+    /**
+     * Returns a list of all Availability objects corresponding to a person id. The personId argument
+     * refers to the id of a person.
+     * @param personId the id of a Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
     public List<Availability> getAvailabilityList(Person person){
         TypedQuery<Availability> query = em. createNamedQuery("Availability.findPersonId", Availability.class);
         query.setParameter(1, person);
         return query.getResultList();
     }
-
+    
+    /**
+     * Returns a list of all CompetenceProfile objects corresponding to a person id. The personId argument
+     * refers to the id of a person.
+     * @param personId the id of a Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
     public List<CompetenceProfile> getCompetenceProfileList(Person person){
         TypedQuery<CompetenceProfile> query = em. createNamedQuery("CompetenceProfile.findPersonId", CompetenceProfile.class);
         query.setParameter(1, person);
         return query.getResultList();
     }
-
+    
+    /**
+     * Returns an Availability object for recruiting purposes. The id argument
+     * refers to the id of a person.
+     * @param id the id of Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
     public Status getStatus(long id){
         return em.find(Status.class, id);
     }
-
+    
+    /**
+     * Returns an Application object for displaying to the requiters. The id argument
+     * refers to the id of an application.
+     * @param id the id of Application
+     * @return   the Application object mathing the id
+     * @see      Application
+     */
     public Application getApplication(long id){
         return em.find(Application.class, id);
     }
-
+    
+    /**
+     * Returns an Application object for displaying to the requiters. The id argument
+     * refers to the id of an application.
+     * @param id the id of Application
+     * @return   the Application object mathing the id
+     * @see      Application
+     */
     public List<Application> getApplicationList(){
         TypedQuery<Application> query = em. createNamedQuery("Application.findAll", Application.class);
         return query.getResultList();

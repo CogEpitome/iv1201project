@@ -65,7 +65,6 @@ public class ApplicantController {
             return "success";
         }
     }*/
-  
     public void createApplication(ApplicantDTO applicant){
         Person person = getPerson(applicant.getUserName());
         Application app = new Application();
@@ -78,14 +77,7 @@ public class ApplicantController {
         availability.setPersonId(person);
         dao.persist(availability);
     }
-    /**
-     * Creates a competence profile which holds information about
-     * a specific competence and the years of experience a specific
-     * user has in that competence
-     * @param competenceName name of the competence
-     * @param username username of the user
-     * @param yearsOfExperience years of experience the user has in this competence
-     */
+    
     public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience){
         Competence comp;
         if(getCompetence(competenceName) == null){

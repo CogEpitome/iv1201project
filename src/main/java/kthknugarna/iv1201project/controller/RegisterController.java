@@ -23,11 +23,7 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
 public class RegisterController {
     @EJB ApplicantDAO dao;
     @EJB VerificationHandler verifier;
-    /**
-     * Registers a user if the username is not already taken
-     * @param input DTO with registration input information from the user
-     * @return success message or error message
-     */
+    
     public String register(InputDTO input){
         Person person = getPerson(input.getUsername());
         if(person != null)
