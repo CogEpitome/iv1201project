@@ -53,15 +53,6 @@ public class RecruiterView implements Serializable{
     private String searchParameter;
     
     /**
-     * Returns a Person object for authentication. the username argument is entered 
-     * from the client, and if the username exists the person that holds the 
-     * username is returned. If no person has the username, the method 
-     * returns null.
-     * @param username the chosen name of a registered user
-     * @return         the person with the specified username
-     * @see            Person
-     */
-    /**
      * Gets a list of ApplicationInfo objects from data in the database and stores it in memory.
      * 
      * @return          an appropriate String message.
@@ -69,6 +60,16 @@ public class RecruiterView implements Serializable{
     public String getApplications(){
         applications = controller.getApplicationInfoList();
         return applications.toString();
+    }
+
+    /**
+     * Updates the Status of the specified Application entity in the database.
+     * 
+     * @param applicationId the id of the application to update.
+     * @param statusId the id of the status to update to.
+     */
+    public void setStatus(long applicationId, long statusId){
+        controller.setStatus(applicationId, statusId);
     }
     
     /**
