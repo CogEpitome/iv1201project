@@ -9,8 +9,15 @@ import java.util.List;
 import kthknugarna.iv1201project.model.dto.ApplicationInfoDTO;
 
 /**
- *
+ * This class contains the information of a single application.
+ * It contains references to all Availability and CompetenceProfile objects associated with the application,
+ * as well as the creator of the application and the application's status (unreviewed, accepted, or denied).
+ * 
+ * Used for transferring data pertaining to an application to the view.
+ * 
  * @author Jonas
+ * @author Benjamin
+ * @author Anton
  */
 public class ApplicationInfo implements ApplicationInfoDTO{
     private final long applicationId;
@@ -26,6 +33,7 @@ public class ApplicationInfo implements ApplicationInfoDTO{
         this.personId = personId;
         this.statusId = statusId;
     }
+     
 
     @Override
     public long getApplicationId() {
