@@ -73,7 +73,10 @@ public class LoginView implements Serializable{
         
     }
     
-    	//logout event, invalidate session
+    /**
+     * Invalidate the http session
+     * @return String "login"
+     */
     public String logout() {
         HttpSession session = SessionUtils.getSession();
         session.invalidate();

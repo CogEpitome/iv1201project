@@ -22,10 +22,12 @@ import kthknugarna.iv1201project.model.Role;
 public class LoginController {
     @EJB ApplicantDAO dao;
     
-    public String getRole(long id){
-        return dao.getRole(id).getName();
-    }
-    
+    /**
+     * Validates that the credentials entered matches a user in the database
+     * @param username user's username
+     * @param password user's password
+     * @return true if credentials are valid, returns false otherwise
+     */
     public boolean login(String username, String password){
         if(dao.getPerson(username) != null){
             if(dao.getPerson(username).getUsername().equals(username) && dao.getPerson(username).getPassword().equals(password))
@@ -36,6 +38,10 @@ public class LoginController {
         }
         else
         return false;
+    }
+    
+    public String getRole(long id){
+        return dao.getRole(id).getName();
     }
     
     private Person getPerson(String username){
