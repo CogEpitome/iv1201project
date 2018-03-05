@@ -5,6 +5,7 @@
  */
 package kthknugarna.iv1201project.integration;
 
+import java.util.ArrayList;
 import kthknugarna.iv1201project.model.Role;
 import kthknugarna.iv1201project.model.Person;
 import static java.util.Collections.list;
@@ -20,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
+import kthknugarna.iv1201project.model.Application;
 import kthknugarna.iv1201project.model.Availability;
 import kthknugarna.iv1201project.model.Competence;
 import kthknugarna.iv1201project.model.CompetenceProfile;
@@ -148,6 +150,32 @@ public class ApplicantDAO {
     }
     
     /**
+     * Returns a list of all Availability objects corresponding to a person id. The personId argument
+     * refers to the id of a person.
+     * @param personId the id of a Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
+    public List<Availability> getAvailabilityList(Person person){
+        TypedQuery<Availability> query = em. createNamedQuery("Availability.findPersonId", Availability.class);
+        query.setParameter(1, person);
+        return query.getResultList();
+    }
+    
+    /**
+     * Returns a list of all CompetenceProfile objects corresponding to a person id. The personId argument
+     * refers to the id of a person.
+     * @param personId the id of a Person
+     * @return   the availability period of an applicant
+     * @see      Availability
+     */
+    public List<CompetenceProfile> getCompetenceProfileList(Person person){
+        TypedQuery<CompetenceProfile> query = em. createNamedQuery("CompetenceProfile.findPersonId", CompetenceProfile.class);
+        query.setParameter(1, person);
+        return query.getResultList();
+    }
+    
+    /**
      * Returns an Availability object for recruiting purposes. The id argument
      * refers to the id of a person.
      * @param id the id of Person
@@ -156,5 +184,28 @@ public class ApplicantDAO {
      */
     public Status getStatus(long id){
         return em.find(Status.class, id);
+    }
+    
+    /**
+     * Returns an Application object for displaying to the requiters. The id argument
+     * refers to the id of an application.
+     * @param id the id of Application
+     * @return   the Application object mathing the id
+     * @see      Application
+     */
+    public Application getApplication(long id){
+        return em.find(Application.class, id);
+    }
+    
+    /**
+     * Returns an Application object for displaying to the requiters. The id argument
+     * refers to the id of an application.
+     * @param id the id of Application
+     * @return   the Application object mathing the id
+     * @see      Application
+     */
+    public List<Application> getApplicationList(){
+        TypedQuery<Application> query = em. createNamedQuery("Application.findAll", Application.class);
+        return query.getResultList();
     }
 }
