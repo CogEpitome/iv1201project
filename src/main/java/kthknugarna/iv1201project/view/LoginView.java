@@ -2,12 +2,15 @@ package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.ResourceHandler;
+import javax.faces.application.ResourceHandlerWrapper;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
 
 import kthknugarna.iv1201project.controller.LoginController;
 import kthknugarna.iv1201project.model.SessionUtils;
+import kthknugarna.iv1201project.model.DynamicResourceHandler;
 
 /**
  *
@@ -28,6 +31,7 @@ public class LoginView implements Serializable{
     private LoginController controller;
     public String username;
     private String password;
+    DynamicResourceHandler drh = new DynamicResourceHandler();
     
     /**
      * Validates the entered username and password. If credentials are valid,
@@ -43,6 +47,7 @@ public class LoginView implements Serializable{
 
                     session.setAttribute("username", username);
                     role = controller.getRoleName(username);
+                    drh.testWrite();
                     return role;
                 } else{
                     ViewUtils.SetWarning("Incorrect"
