@@ -5,27 +5,19 @@
  */
 package kthknugarna.iv1201project.integration;
 
-import java.util.ArrayList;
 import kthknugarna.iv1201project.model.Role;
 import kthknugarna.iv1201project.model.Person;
-import static java.util.Collections.list;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 import kthknugarna.iv1201project.model.Application;
 import kthknugarna.iv1201project.model.Availability;
 import kthknugarna.iv1201project.model.Competence;
 import kthknugarna.iv1201project.model.CompetenceProfile;
-import kthknugarna.iv1201project.model.Input;
 import kthknugarna.iv1201project.model.Status;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
@@ -150,27 +142,25 @@ public class ApplicantDAO {
     }
     
     /**
-     * Returns a list of all Availability objects corresponding to a person id. The personId argument
-     * refers to the id of a person.
-     * @param personId the id of a Person
+     * Returns a list of all Availability objects corresponding to a person
+     * @param person the person the availability corresponds to
      * @return   the availability period of an applicant
      * @see      Availability
      */
     public List<Availability> getAvailabilityList(Person person){
-        TypedQuery<Availability> query = em. createNamedQuery("Availability.findPersonId", Availability.class);
+        TypedQuery<Availability> query = em.createNamedQuery("Availability.findPersonId", Availability.class);
         query.setParameter(1, person);
         return query.getResultList();
     }
     
     /**
-     * Returns a list of all CompetenceProfile objects corresponding to a person id. The personId argument
-     * refers to the id of a person.
-     * @param personId the id of a Person
+     * Returns a list of all CompetenceProfile objects corresponding to a person
+     * @param person the person the competence profile corresponds to
      * @return   the availability period of an applicant
      * @see      Availability
      */
     public List<CompetenceProfile> getCompetenceProfileList(Person person){
-        TypedQuery<CompetenceProfile> query = em. createNamedQuery("CompetenceProfile.findPersonId", CompetenceProfile.class);
+        TypedQuery<CompetenceProfile> query = em.createNamedQuery("CompetenceProfile.findPersonId", CompetenceProfile.class);
         query.setParameter(1, person);
         return query.getResultList();
     }
@@ -198,9 +188,7 @@ public class ApplicantDAO {
     }
     
     /**
-     * Returns an Application object for displaying to the requiters. The id argument
-     * refers to the id of an application.
-     * @param id the id of Application
+     * Returns an Application object for displaying to the recruiters.
      * @return   the Application object mathing the id
      * @see      Application
      */

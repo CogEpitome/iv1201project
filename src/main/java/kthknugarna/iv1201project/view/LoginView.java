@@ -7,19 +7,11 @@ package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import kthknugarna.iv1201project.controller.LoginController;
-import kthknugarna.iv1201project.integration.ApplicantDAO;
 import kthknugarna.iv1201project.model.SessionUtils;
 
 /**
@@ -36,6 +28,11 @@ public class LoginView implements Serializable{
     public String username;
     private String password;
     
+    /**
+     * Validates the entered username and password. If credentials are valid,
+     * create a http session and return role (used for paging)
+     * @return a string used for paging
+     */
     public String validateUsernamePassword(){
             try{
                 boolean valid = controller.login(username, password);
@@ -56,11 +53,12 @@ public class LoginView implements Serializable{
                 ViewUtils.SetWarning("An error occured while logging in, it was probably our bad! Try reloading the page or contact us for support.", e.getMessage());
                 return "login";
             }
-       
-        
     }
     
-    //logout event, invalidate session
+    /**
+     * Invalidate the http session
+     * @return String "login"
+     */
     public String logout() {
         try{
             HttpSession session = SessionUtils.getSession();
