@@ -26,7 +26,7 @@ public class LoginController {
         return dao.getRole(id).getName();
     }
     
-    public boolean login(String username, String password){
+    public boolean login(String username, String password) {
         if(dao.getPerson(username) != null){
             if(dao.getPerson(username).getUsername().equals(username) && dao.getPerson(username).getPassword().equals(password))
                 //log in the user

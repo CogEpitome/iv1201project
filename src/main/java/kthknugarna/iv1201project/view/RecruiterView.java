@@ -45,12 +45,15 @@ public class RecruiterView implements Serializable{
     private final String SEARCHPARAM_TIME = "time";
     private final String SEARCHPARAM_COMPETENCE = "competence";
     private final String SEARCHPARAM_NAME = "name";
+    private final long STATUSID_DENY = 1;
+    private final long STATUSID_ACCEPT = 2;
     @EJB
     private RecruiterController controller;
     private InputDTO input;
     private List<ApplicationInfoDTO> applications, filteredApplications;
     private String searchFromTime, searchToTime, searchCompetence, searchName;
     private String searchParameter;
+    private long currentApplication;
     
     /**
      * Gets a list of ApplicationInfo objects from data in the database and stores it in memory.
@@ -58,8 +61,37 @@ public class RecruiterView implements Serializable{
      * @return          an appropriate String message.
      */
     public String getApplications(){
-        applications = controller.getApplicationInfoList();
-        return applications.toString();
+        try{
+            applications = controller.getApplicationInfoList();
+            return applications.toString();
+        } catch(Exception e){
+            ViewUtils.SetWarning("An error occured while logging out, it was probably our bad! Try reloading the page or contact us for support.", e.getMessage());
+            return "failure";
+        }
+    }
+    
+    /**
+     * Sets the Status of the specified Application entity in the database to accepted.
+     * @throws java.lang.Exception
+     */
+    public void acceptApplication() throws Exception{
+        try{
+            setStatus((long)0, STATUSID_ACCEPT);
+        } catch (Exception e){
+            throw new Exception(e);
+        }
+    }
+    
+    /**
+     * Sets the Status of the specified Application entity in the database to denied.
+     * @throws java.lang.Exception
+     */
+    public void denyApplication()throws Exception{
+        try{
+            setStatus((long)1006, STATUSID_DENY);
+        } catch (Exception e){
+            throw new Exception(e);
+        }
     }
 
     /**
@@ -68,8 +100,12 @@ public class RecruiterView implements Serializable{
      * @param applicationId the id of the application to update.
      * @param statusId the id of the status to update to.
      */
-    public void setStatus(long applicationId, long statusId){
-        controller.setStatus(applicationId, statusId);
+    public void setStatus(long applicationId, long statusId) throws Exception{
+        try{
+            controller.setStatus(applicationId, statusId);
+        } catch(Exception e){
+            throw new Exception(e);
+        }
     }
     
     /**
@@ -79,17 +115,21 @@ public class RecruiterView implements Serializable{
      * More search criteria can be added by adding cases to this method.
      */
     private void filterApplications(){
-        filteredApplications.clear();    
-        switch(searchParameter){
-            case SEARCHPARAM_TIME:
-                addByTime(searchFromTime, searchToTime);
-                break;
-            case SEARCHPARAM_COMPETENCE:
-                addByCompetence(searchCompetence);
-                break;
-            case SEARCHPARAM_NAME:
-                addByName(searchName);
-                break;
+        try{
+            filteredApplications.clear();    
+            switch(searchParameter){
+                case SEARCHPARAM_TIME:
+                    addByTime(searchFromTime, searchToTime);
+                    break;
+                case SEARCHPARAM_COMPETENCE:
+                    addByCompetence(searchCompetence);
+                    break;
+                case SEARCHPARAM_NAME:
+                    addByName(searchName);
+                    break;
+            }
+        } catch (Exception e){
+            ViewUtils.SetWarning("The server failed to find the requested applications!", e.getMessage());
         }
     }
     
@@ -100,25 +140,29 @@ public class RecruiterView implements Serializable{
      * @param searchFromTime the earliest starting time.
      * @param searchToTime the latest ending time.
      */
-    private void addByTime(String searchFromTime, String searchToTime){
-        int fromTime = Integer.valueOf(searchFromTime);
-        int toTime = Integer.valueOf(searchToTime); 
-        for(ApplicationInfoDTO app : applications){
-            boolean add = false;
-            for(Availability av : app.getAvailabilityList()){
-                if(searchFromTime.isEmpty() || searchToTime.isEmpty()){
-                    if(searchToTime.isEmpty() && Integer.valueOf(av.getFromDate()) > fromTime){
-                        add = true;
-                    } else if(searchFromTime.isEmpty() && Integer.valueOf(av.getToDate()) < toTime){
-                        add = true;
-                    } else if(Integer.valueOf(av.getFromDate()) > fromTime && Integer.valueOf(av.getToDate()) < toTime){
-                        add = true;   
+    private void addByTime(String searchFromTime, String searchToTime) throws Exception{
+        try{
+            int fromTime = Integer.valueOf(searchFromTime);
+            int toTime = Integer.valueOf(searchToTime); 
+            for(ApplicationInfoDTO app : applications){
+                boolean add = false;
+                for(Availability av : app.getAvailabilityList()){
+                    if(searchFromTime.isEmpty() || searchToTime.isEmpty()){
+                        if(searchToTime.isEmpty() && Integer.valueOf(av.getFromDate()) > fromTime){
+                            add = true;
+                        } else if(searchFromTime.isEmpty() && Integer.valueOf(av.getToDate()) < toTime){
+                            add = true;
+                        } else if(Integer.valueOf(av.getFromDate()) > fromTime && Integer.valueOf(av.getToDate()) < toTime){
+                            add = true;   
+                            }
                         }
                     }
+                if(add){
+                    filteredApplications.add(app);
                 }
-            if(add){
-                filteredApplications.add(app);
             }
+        } catch (Exception e){
+            throw new Exception(e);
         }
             
     }
@@ -129,17 +173,21 @@ public class RecruiterView implements Serializable{
      * 
      * @param searchCompetence the competence to filter by.
      */
-    private void addByCompetence(String searchCompetence){
-        for(ApplicationInfoDTO app : applications){
-            boolean add = false;
-            for(CompetenceProfile comPro : app.getCompetenceProfileList()){
-                if(comPro.getCompetenceId().getName().equals(searchCompetence)){
-                    add = true;  
+    private void addByCompetence(String searchCompetence) throws Exception{
+        try{
+            for(ApplicationInfoDTO app : applications){
+                boolean add = false;
+                for(CompetenceProfile comPro : app.getCompetenceProfileList()){
+                    if(comPro.getCompetenceId().getName().equals(searchCompetence)){
+                        add = true;  
+                        }
                     }
+                if(add){
+                    filteredApplications.add(app);
                 }
-            if(add){
-                filteredApplications.add(app);
             }
+        } catch (Exception e){
+            throw new Exception(e);
         }
             
     }
@@ -150,16 +198,73 @@ public class RecruiterView implements Serializable{
      * 
      * @param searchName the name to filter by.
      */
-    private void addByName(String searchName){
-        for(ApplicationInfoDTO app : applications){
-            boolean add = false;
-            if(app.getPersonId().getName().equals(searchName)){
-                add = true;   
-            }
-            if(add){
-                filteredApplications.add(app);
-            }
+    private void addByName(String searchName) throws Exception{
+        try{
+            for(ApplicationInfoDTO app : applications){
+                boolean add = false;
+                if(app.getPersonId().getName().equals(searchName)){
+                    add = true;   
+                }
+                if(add){
+                    filteredApplications.add(app);
+                }
+            } 
+        } catch (Exception e){
+            throw new Exception(e);
         }
             
     }
+
+    //Getters and setters
+    public String getSearchFromTime() {
+        return searchFromTime;
+    }
+
+    public void setSearchFromTime(String searchFromTime) {
+        this.searchFromTime = searchFromTime;
+    }
+
+    public String getSearchToTime() {
+        return searchToTime;
+    }
+
+    public void setSearchToTime(String searchToTime) {
+        this.searchToTime = searchToTime;
+    }
+
+    public String getSearchCompetence() {
+        return searchCompetence;
+    }
+
+    public void setSearchCompetence(String searchCompetence) {
+        this.searchCompetence = searchCompetence;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+
+    public String getSearchParameter() {
+        return searchParameter;
+    }
+
+    public void setSearchParameter(String searchParameter) {
+        this.searchParameter = searchParameter;
+    }
+
+    public long getCurrentApplication() {
+        return currentApplication;
+    }
+
+    public void setCurrentApplication(long currentApplication) {
+        this.currentApplication = currentApplication;
+    }
+    
+    
+    
+    
 }

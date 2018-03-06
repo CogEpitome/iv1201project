@@ -35,49 +35,41 @@ public class LoginView implements Serializable{
     private LoginController controller;
     public String username;
     private String password;
-    /*
-    @Inject
-    private Conversation conversation;
-    
-    private void startConversation() {
-        if (conversation.isTransient()) {
-            conversation.begin();
-        }
-    }
-
-    private void stopConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-    }*/
     
     public String validateUsernamePassword(){
-        
-           // startConversation();
-            boolean valid = controller.login(username, password);
-            String role;
-            if(valid){
-                HttpSession session = SessionUtils.getSession();
-                
-                session.setAttribute("username", username);
-                role = controller.getRoleName(username);
-                return role;
-            } else{
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect"
-                                + " username and password", "Please enter correct"
-                                        + " username and password"));
+            try{
+                boolean valid = controller.login(username, password);
+                String role;
+                if(valid){
+                    HttpSession session = SessionUtils.getSession();
+
+                    session.setAttribute("username", username);
+                    role = controller.getRoleName(username);
+                    return role;
+                } else{
+                    ViewUtils.SetWarning("Incorrect"
+                                    + " username and password", "Please enter correct"
+                                            + " username and password");
+                    return "login";
+                }
+            } catch (Exception e){
+                ViewUtils.SetWarning("An error occured while logging in, it was probably our bad! Try reloading the page or contact us for support.", e.getMessage());
                 return "login";
             }
        
         
     }
     
-    	//logout event, invalidate session
+    //logout event, invalidate session
     public String logout() {
-        HttpSession session = SessionUtils.getSession();
-        session.invalidate();
-        return "login";
+        try{
+            HttpSession session = SessionUtils.getSession();
+            session.invalidate();
+            return "login";
+        } catch(Exception e){
+            ViewUtils.SetWarning("An error occured while logging out, it was probably our bad! Try reloading the page or contact us for support.", e.getMessage());
+            return "login";
+        }
     }
     
     public LoginController getLoginController(){

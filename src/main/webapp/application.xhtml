@@ -8,11 +8,9 @@
 </h:head>
 <h:body>
     <h:form>
-        <p>Welcome #{loginView.username}</p>
-        <a href="register.xhtml">View application</a>
+        <p>Welcome #{recruiterView.username}</p>
         <h:commandLink action="#{recruiterView.acceptApplication}" value="Accept"></h:commandLink>
-        <h:commandLink action="#{recruiterView.denyApplication}" value="Deny"></h:commandLink>
-        <h:commandLink action="#{recruiterView.getApplications}" value="GETTTTT"></h:commandLink>
+        <h:commandLink action="#{recruiterView.denyApplication}" value="Accept"></h:commandLink>
     </h:form>
 </h:body>
 </html>
