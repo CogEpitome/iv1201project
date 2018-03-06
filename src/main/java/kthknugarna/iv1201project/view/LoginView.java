@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
@@ -19,6 +14,12 @@ import kthknugarna.iv1201project.model.SessionUtils;
  * @author Jonas
  * @author Anton
  * @author Benjamin
+ * 
+ * This class is responsible for handling the presentation logic for the login web page.
+ * It uses a LoginController object to access lower layers in the architecture.
+ * 
+ * @see login.xhtml
+ * @see LoginController.java
  */
 @ManagedBean
 @SessionScoped
@@ -69,6 +70,7 @@ public class LoginView implements Serializable{
             return "login";
         }
     }
+    
     
     public LoginController getLoginController(){
         return controller;
