@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.model;
 
 import javax.ejb.Stateless;
@@ -14,14 +9,24 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.*;
 
 /**
- *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
+ * 
+ * This class is used to return validated input to prevent incorrect input and XSS.
  */
 
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class VerificationHandler {
         
+    /**
+     * Returns a string containing input validated according to a specified data type.
+     * @param in    The input data to validate.
+     * @param type  Which data type to validate as. Valid options are string and long.
+     * @return      The validated input, as a String.
+     * @throws VerificationException if validation failed, containing a suitable message.
+     */
     public String verifyInput(String in, String type) throws VerificationException{
         if(inputIsType(in, type)){
             String safe = Jsoup.clean(in, Whitelist.basic());
@@ -35,6 +40,12 @@ public class VerificationHandler {
         }
     }
     
+    /**
+     * Returns true if the submitted input is of a given data type.
+     * @param in    The input to check
+     * @param type  The data type of the input, valid types are string and long.
+     * @return      A boolean, true if the input is of the required type, otherwise false.
+     */
     private boolean inputIsType(String in, String type) {
         try{
             if(type.equalsIgnoreCase("string")){
@@ -50,6 +61,13 @@ public class VerificationHandler {
         }
     }
     
+    /**
+     * Used to verify all data in an InputDTO object and return a validated version that is safe to use.
+     * 
+     * @param in    The InputDTO to sanitize and validate.
+     * @return      A new InputDTO containing the validated data.
+     * @throws VerificationException 
+     */
     public InputDTO verifyInput(InputDTO in) throws VerificationException {
         String safeFirstName = verifyInput(in.getFirstName(), "String");
         String safeSurname = verifyInput(in.getSurname(), "String");
