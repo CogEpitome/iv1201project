@@ -23,6 +23,20 @@
                 <to-view-id>/login.xhtml</to-view-id>
             </navigation-case>
         </navigation-rule>
+        <navigation-rule>
+		<from-view-id>/recruiters.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>review</from-outcome>
+			<to-view-id>/application.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+        <navigation-rule>
+		<from-view-id>/application.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>reload</from-outcome>
+			<to-view-id>/recruiters.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
         
 
 </faces-config>

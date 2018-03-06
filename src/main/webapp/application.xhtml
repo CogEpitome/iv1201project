@@ -2,15 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<title>Recruiters</title>
+	<title>Application</title>
 </h:head>
 <h:body>
+    <ui:include src="/WEB-INF/header.xhtml" />
     <h:form>
-        <p>Welcome #{recruiterView.username}</p>
         <h:commandLink action="#{recruiterView.acceptApplication}" value="Accept"></h:commandLink>
-        <h:commandLink action="#{recruiterView.denyApplication}" value="Accept"></h:commandLink>
+        &nbsp;&nbsp;&nbsp;
+        <h:commandLink action="#{recruiterView.denyApplication}" value="Deny"></h:commandLink>
+        &nbsp;&nbsp;&nbsp;
+        <a href="recruiters.xhtml">Go back</a>
+        <p>${recruiterView.currentApplication.personId.name} ${recruiterView.currentApplication.personId.surname}</p>
+
+        <p>${recruiterView.currentApplication.statusId.name}</p>
     </h:form>
+    <ui:include src="/WEB-INF/footer.xhtml" />
 </h:body>
 </html>

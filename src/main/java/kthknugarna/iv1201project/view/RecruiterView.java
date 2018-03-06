@@ -1,23 +1,16 @@
 package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 import kthknugarna.iv1201project.controller.RecruiterController;
-import kthknugarna.iv1201project.controller.RegisterController;
-import kthknugarna.iv1201project.model.Application;
 import kthknugarna.iv1201project.model.Availability;
+import kthknugarna.iv1201project.model.Competence;
 import kthknugarna.iv1201project.model.CompetenceProfile;
-import kthknugarna.iv1201project.model.Input;
-import kthknugarna.iv1201project.model.Person;
 import kthknugarna.iv1201project.model.dto.ApplicationInfoDTO;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 
@@ -45,52 +38,77 @@ public class RecruiterView implements Serializable{
     private final String SEARCHPARAM_TIME = "time";
     private final String SEARCHPARAM_COMPETENCE = "competence";
     private final String SEARCHPARAM_NAME = "name";
-    private final long STATUSID_DENY = 1;
-    private final long STATUSID_ACCEPT = 2;
+    private final long STATUSID_DENY = 2;
+    private final long STATUSID_ACCEPT = 1;
+    private ApplicationInfoDTO currentApplication;
     @EJB
     private RecruiterController controller;
     private InputDTO input;
     private List<ApplicationInfoDTO> applications, filteredApplications;
+    private List<String> competences;
     private String searchFromTime, searchToTime, searchCompetence, searchName;
     private String searchParameter;
-    private long currentApplication;
+    
+
     
     /**
      * Gets a list of ApplicationInfo objects from data in the database and stores it in memory.
      * 
-     * @return          an appropriate String message.
      */
-    public String getApplications(){
+    public void getApplicationsList(){
         try{
             applications = controller.getApplicationInfoList();
-            return applications.toString();
+            filteredApplications = null;
+            populateCompetences();
+            
         } catch(Exception e){
             ViewUtils.SetWarning("An error occured while logging out, it was probably our bad! Try reloading the page or contact us for support.", e.getMessage());
-            return "failure";
         }
     }
     
     /**
      * Sets the Status of the specified Application entity in the database to accepted.
-     * @throws java.lang.Exception
+     * @return A string for facescontext to reload the page
      */
-    public void acceptApplication() throws Exception{
+    public String acceptApplication() {
         try{
-            setStatus((long)0, STATUSID_ACCEPT);
+            setStatus(currentApplication.getApplicationId(), STATUSID_ACCEPT);
+            return "reload";
         } catch (Exception e){
-            throw new Exception(e);
+            ViewUtils.SetWarning(e.getMessage(), e.getMessage());
+            return "failure";
         }
     }
     
     /**
      * Sets the Status of the specified Application entity in the database to denied.
-     * @throws java.lang.Exception
+     * @return A string for facescontext to reload the page
      */
-    public void denyApplication()throws Exception{
+    public String denyApplication() {
         try{
-            setStatus((long)1006, STATUSID_DENY);
+            setStatus(currentApplication.getApplicationId(), STATUSID_DENY);
+            return "reload";
         } catch (Exception e){
-            throw new Exception(e);
+            ViewUtils.SetWarning(e.getMessage(), e.getMessage());
+            return "failure";
+        }
+    }
+    
+    /**
+     * Fills the list competences with all Competence object names in the database.
+     */
+    public void populateCompetences(){
+        try{
+            if(competences == null)
+                competences = new ArrayList<>();
+            else
+                competences.clear();
+            
+            for(Competence c : controller.getCompetences()){
+                competences.add(c.getName());
+            }
+        } catch (Exception e){
+            ViewUtils.SetWarning("An error occurred while getting the list of competences.", e.getMessage());
         }
     }
 
@@ -99,6 +117,7 @@ public class RecruiterView implements Serializable{
      * 
      * @param applicationId the id of the application to update.
      * @param statusId the id of the status to update to.
+     * @throws java.lang.Exception
      */
     public void setStatus(long applicationId, long statusId) throws Exception{
         try{
@@ -114,12 +133,16 @@ public class RecruiterView implements Serializable{
      * 
      * More search criteria can be added by adding cases to this method.
      */
-    private void filterApplications(){
+    public void filterApplications(String searchParameter){
         try{
-            filteredApplications.clear();    
+            if(filteredApplications == null)
+                filteredApplications = new ArrayList<>();
+            else
+                filteredApplications.clear();
+            
             switch(searchParameter){
                 case SEARCHPARAM_TIME:
-                    addByTime(searchFromTime, searchToTime);
+                    addByTime();
                     break;
                 case SEARCHPARAM_COMPETENCE:
                     addByCompetence(searchCompetence);
@@ -140,21 +163,17 @@ public class RecruiterView implements Serializable{
      * @param searchFromTime the earliest starting time.
      * @param searchToTime the latest ending time.
      */
-    private void addByTime(String searchFromTime, String searchToTime) throws Exception{
+    private void addByTime() throws Exception{
         try{
+            if(searchFromTime.isEmpty()) searchFromTime = "0";
+            if(searchToTime.isEmpty()) searchToTime = String.valueOf(Integer.MAX_VALUE);
             int fromTime = Integer.valueOf(searchFromTime);
             int toTime = Integer.valueOf(searchToTime); 
             for(ApplicationInfoDTO app : applications){
                 boolean add = false;
                 for(Availability av : app.getAvailabilityList()){
-                    if(searchFromTime.isEmpty() || searchToTime.isEmpty()){
-                        if(searchToTime.isEmpty() && Integer.valueOf(av.getFromDate()) > fromTime){
-                            add = true;
-                        } else if(searchFromTime.isEmpty() && Integer.valueOf(av.getToDate()) < toTime){
-                            add = true;
-                        } else if(Integer.valueOf(av.getFromDate()) > fromTime && Integer.valueOf(av.getToDate()) < toTime){
-                            add = true;   
-                            }
+                    if(Integer.valueOf(av.getFromDate()) > fromTime && Integer.valueOf(av.getToDate()) < toTime){
+                        add = true;   
                         }
                     }
                 if(add){
@@ -214,6 +233,16 @@ public class RecruiterView implements Serializable{
         }
             
     }
+    
+    /**
+     * 
+     * @param appInfo
+     * @return 
+     */
+    public String reviewButton(ApplicationInfoDTO appInfo) {
+        setCurrentApplication(appInfo);
+        return "review";
+    }
 
     //Getters and setters
     public String getSearchFromTime() {
@@ -256,13 +285,37 @@ public class RecruiterView implements Serializable{
         this.searchParameter = searchParameter;
     }
 
-    public long getCurrentApplication() {
+    public ApplicationInfoDTO getCurrentApplication() {
         return currentApplication;
     }
 
-    public void setCurrentApplication(long currentApplication) {
+    public void setCurrentApplication(ApplicationInfoDTO currentApplication) {
         this.currentApplication = currentApplication;
     }
+   
+    
+    public List<ApplicationInfoDTO> getApplications(){
+        return applications;
+    }
+    public void setApplications(List<ApplicationInfoDTO> list) {
+        this.applications = list;
+    }
+    public List<ApplicationInfoDTO> getFilteredApplications(){
+        return filteredApplications;
+    }
+    public void setFilteredApplications(List<ApplicationInfoDTO> list) {
+        this.filteredApplications = list;
+    }
+    
+    public void setCompetences(List<String> competences) {
+        this.competences = competences;
+    }
+
+    public List<String> getCompetences() {
+        return competences;
+    }
+    
+    
     
     
     

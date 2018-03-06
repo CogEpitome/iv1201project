@@ -61,7 +61,7 @@ public class ApplicantDAO {
             return person.get(0);
             else return null;
         } catch (EJBException ee){
-            throw new Exception(ee);
+            throw new Exception("Error in getPerson of DAO"+ee);
         }
     }
     
@@ -152,6 +152,21 @@ public class ApplicantDAO {
     }
     
     /**
+     * Returns a list of all Competence objects
+     * @return   a list of all Competence objects in the database
+     * @throws java.lang.Exception
+     * @see      Competence
+     */
+    public List<Competence> getCompetences() throws Exception{
+        try{
+        TypedQuery<Competence> query = em.createNamedQuery("Competence.findAll", Competence.class);
+        return query.getResultList();
+        } catch (Exception e){
+            throw new Exception(e);
+        }
+    }
+    
+    /**
      * Returns an Availability object for recruiting purposes. The id argument
      * refers to the id of a person.
      * @param id the id of Person
@@ -187,9 +202,9 @@ public class ApplicantDAO {
     /**
      * Returns a list of all CompetenceProfile objects corresponding to a person
      * @param person the person the competence profile corresponds to
-     * @return   the availability period of an applicant
+     * @return   the list of CompetenceProfiles corresponding to the person
      * @throws java.lang.Exception
-     * @see      Availability
+     * @see      CompetenceProfile
      */
     public List<CompetenceProfile> getCompetenceProfileList(Person person) throws Exception{
         try{

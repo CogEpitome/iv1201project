@@ -2,11 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>Applicants</title>
 </h:head>
 <h:body>
+    <ui:include src="/WEB-INF/header.xhtml" />
     <h:form>
         <p>Welcome #{loginView.username}</p>
         <h:commandLink action="#{loginView.logout}" value="Logout"></h:commandLink>
@@ -34,7 +36,10 @@
         <br></br><br></br>
                    
         <h:commandButton value="Send" action="#{applicantView.save}" />
+        <br></br><br></br>
+        
+        <a href="applicants.xhtml">Cancel</a>
     </h:form>
-    
+    <ui:include src="/WEB-INF/footer.xhtml" />
 </h:body>
 </html>

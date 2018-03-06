@@ -3,29 +3,80 @@
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>Recruiters</title>
 </h:head>
 <h:body>
+    <ui:include src="/WEB-INF/header.xhtml" />
     <h:form>
         <p>Welcome #{loginView.username}</p>
-        <a href="register.xhtml">View application</a>
-        <h:commandLink action="#{recruiterView.acceptApplication}" value="Accept"></h:commandLink>
-        <h:commandLink action="#{recruiterView.denyApplication}" value="Deny"></h:commandLink>
-        <h:commandLink action="#{recruiterView.getApplications}" value="GETTTTT"></h:commandLink>
+        <h:commandLink action="#{loginView.logout}" value="Logout"></h:commandLink>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h:commandLink action="#{recruiterView.getApplicationsList}" value="Update Application List"></h:commandLink>
+    </h:form>
+    <br></br>
+    <h:form>
+        <!--SEARCH BY NAME-->
+        <h:outputLabel for="name" value="Search by name: "/>
+        <h:inputText id="name" value="#{recruiterView.searchName}"/>       
+        <h:commandButton value="Search by name" action="#{recruiterView.filterApplications('name')}"/>
+        <br></br>
+        
+        <!--SEARCH BY TIME-->
+        <h:outputLabel for="availabilityFrom" value="Available from: "/>
+        <h:inputText id="availabilityFrom" value="#{recruiterView.searchFromTime}"/>
+        &nbsp;&nbsp;
+        <h:outputLabel for="availabilityTo" value="Available to: "/>
+        <h:inputText id="availabilityTo" value="#{recruiterView.searchToTime}"/>
+        <h:commandButton value="Search by availability" action="#{recruiterView.filterApplications('time')}"/>
+        <br></br>
+        
+        <!--SEARCH BY COMPETENCE-->
+        <h:outputLabel for="compMenu" value="Filter by competence"/>
+        <h:selectOneMenu value="#{recruiterView.searchCompetence}" id="compMenu">
+            <f:selectItems value="#{recruiterView.competences}" var="competence" itemValue="#{competence}" />
+        </h:selectOneMenu>
+        <h:commandButton value="Search by competence" action="#{recruiterView.filterApplications('competence')}"/>
+        <br></br>
+    </h:form>
+    <br></br>
+    <h:form>
+    <h:dataTable value="#{recruiterView.applications}" var ="app" border="2" cellspacing="1" cellpadding="1" rendered="#{recruiterView.filteredApplications == null}">
+        <h:column>  				
+            <f:facet name = "header">&nbsp;&nbsp;First name&nbsp;&nbsp;</f:facet>    				
+            #{app.personId.name}
+        </h:column>
+        <h:column>  				
+            <f:facet name = "header">&nbsp;&nbsp;Surname&nbsp;&nbsp;</f:facet>    				
+            #{app.personId.surname}
+        </h:column> 
+        <h:column>  				
+            <f:facet name = "header"></f:facet>    				
+            <h:commandButton value="Review" action="#{recruiterView.reviewButton(app)}" />
+        </h:column> 
+        
+    </h:dataTable>
     </h:form>
     
-    <h:dataTable value="#{recruiterView.applications}" var ="application">
-        <h:column>
-            <f:facet name="header" Firstname:</f:facet>
-            #{application.name}
+    <h:form>
+    <h:dataTable value="#{recruiterView.filteredApplications}" var ="filapp" border="2" cellspacing="1" cellpadding="1" rendered="#{recruiterView.filteredApplications != null}">
+        <h:column>  				
+            <f:facet name = "header">&nbsp;&nbsp;First name&nbsp;&nbsp;</f:facet>    				
+            #{filapp.personId.name}
         </h:column>
-        <h:column>
-            <f:facet name="header" Surname:</f:facet>
-            #{application.surName}
-        </h:column>
-    
+        <h:column>  				
+            <f:facet name = "header">&nbsp;&nbsp;Surname&nbsp;&nbsp;</f:facet>    				
+            #{filapp.personId.surname}
+        </h:column> 
+        <h:column>  				
+            <f:facet name = "header"></f:facet>    				
+            <h:commandButton value="Review" action="#{recruiterView.reviewButton(filapp)}" />
+        </h:column> 
+        
     </h:dataTable>
+    </h:form>
+    <ui:include src="/WEB-INF/footer.xhtml" />
 </h:body>
 </html>

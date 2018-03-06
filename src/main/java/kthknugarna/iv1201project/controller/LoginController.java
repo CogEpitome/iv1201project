@@ -41,7 +41,7 @@ public class LoginController {
             String validUsername = verificationHandler.verifyInput(username, "string");
             String validPassword = verificationHandler.verifyInput(password, "string");
             if(dao.getPerson(username) != null){
-                if(dao.getPerson(validUsername).getUsername().equals(validUsername) && dao.getPerson(validPassword).getPassword().equals(validPassword))
+                if(dao.getPerson(validUsername).getUsername().equals(validUsername) && dao.getPerson(validUsername).getPassword().equals(validPassword))
                     //log in the user
                     return true;
                 else
@@ -51,6 +51,8 @@ public class LoginController {
             return false;
         } catch (VerificationException ve){
             throw new Exception(ve);
+        } catch (NullPointerException npe){
+            throw new Exception("Failed to find an account with that username.");
         } catch (Exception e){
             throw new Exception(e);
         }

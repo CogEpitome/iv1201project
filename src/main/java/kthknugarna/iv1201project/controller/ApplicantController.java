@@ -26,7 +26,7 @@ public class ApplicantController {
     @EJB ApplicantDAO dao;
     @EJB VerificationHandler verifier;
     
-    public void createApplication(ApplicantDTO applicant){
+    public void createApplication(ApplicantDTO applicant) throws Exception{
         Person person = getPerson(applicant.getUserName());
         Application app = new Application();
         app.setPersonId(person);
@@ -45,8 +45,10 @@ public class ApplicantController {
      * @param competenceName name of the competence
      * @param username username of the user
      * @param yearsOfExperience years of experience the user has in this competence
+     * @throws java.lang.Exception
      */
-    public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience){
+    public void createCompetenceProfile(String competenceName, String username, BigDecimal yearsOfExperience) throws Exception{
+        try{
         Competence comp;
         if(getCompetence(competenceName) == null){
             comp = new Competence(competenceName);
@@ -58,20 +60,23 @@ public class ApplicantController {
         CompetenceProfile cp = new CompetenceProfile(comp, yearsOfExperience);
         cp.setPersonId(getPerson(username));
         dao.persist(cp);
+        } catch (Exception e){
+            throw new Exception(e);
+        }
     }
     
-    public Person getPerson(String username){
+    public Person getPerson(String username) throws Exception{
         return dao.getPerson(username);
     }
-    public Person getPerson(long id){
+    public Person getPerson(long id) throws Exception{
         return dao.getPerson(id);
     }
     
-    public Competence getCompetence(long id){
+    public Competence getCompetence(long id) throws Exception{
         return dao.getCompetence(id);
     }
     
-    public Competence getCompetence(String name){
+    public Competence getCompetence(String name) throws Exception{
         return dao.getCompetence(name);
     }
 }

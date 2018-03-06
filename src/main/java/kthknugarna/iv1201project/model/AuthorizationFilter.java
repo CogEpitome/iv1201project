@@ -56,6 +56,7 @@ public class AuthorizationFilter implements Filter {
                 //|| (ses != null && ses.getAttribute("username") != null)
                // || reqURI.indexOf("/public/") >= 0
                 || (reqURI.contains("/register.xhtml") && ses.getAttribute("username") == null)
+                || (reqURI.contains("/application.xhtml"))
                 || (ses.getAttribute("username") != null && reqURI.contains("/applicants.xhtml") && con.getRoleName((String)ses.getAttribute("username")).equals("applicant"))
                 || (ses.getAttribute("username") != null && reqURI.contains("/recruiters.xhtml") && con.getRoleName((String)ses.getAttribute("username")).equals("recruiter"))
                 || reqURI.contains("javax.faces.resource"))

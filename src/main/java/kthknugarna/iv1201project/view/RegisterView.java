@@ -43,9 +43,14 @@ public class RegisterView implements Serializable{
     }
 
     public String register(){
+        try{
         startConversation();
         input = new Input(firstName, surname, email, dateOfBirth, username, password);
         return controller.register(input);
+        } catch (Exception e){
+            ViewUtils.SetWarning("Registration failed.", e.getMessage());
+            return "failure";
+        }
     }
     
     public RegisterController getRegisterController(){
