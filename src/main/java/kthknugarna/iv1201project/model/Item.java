@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.model;
 
 
 /**
  *
+ * @author Jonas
  * @author Anton
+ * @author Benjamin
+ * 
+ * Represents an item in the list of competences in applications.xhtml
+ * 
+ * @see applications.xhtml
  */
 public class Item {
 

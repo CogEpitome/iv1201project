@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
@@ -19,6 +14,9 @@ import kthknugarna.iv1201project.model.dto.InputDTO;
  * @author Jonas
  * @author Anton
  * @author Benjamin
+ * 
+ * The view layer class connected to the register.xhtml web page.
+ * @see register.xhtml
  */
 @Named("registerView")
 @ConversationScoped
@@ -42,6 +40,10 @@ public class RegisterView implements Serializable{
         }
     }
 
+    /**
+     * register a new Person in the database
+     * @return a String containing information on success or failure of method.
+     */
     public String register(){
         try{
         startConversation();

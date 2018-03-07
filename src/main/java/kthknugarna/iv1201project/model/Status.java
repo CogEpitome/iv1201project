@@ -24,6 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author Jonas
+ * @author Anton
+ * @author Benjamin
+ * 
+ * Represents a Status entity in the database
  */
 @Entity
 @Table(name = "STATUS")

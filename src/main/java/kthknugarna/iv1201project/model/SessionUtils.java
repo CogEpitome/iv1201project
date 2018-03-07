@@ -12,6 +12,10 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author Anton
+ * @author Jonas
+ * @author Benjamin
+ * 
+ * Session related stuff.
  */
 public class SessionUtils {
     public static HttpSession getSession() {

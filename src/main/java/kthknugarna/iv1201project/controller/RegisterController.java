@@ -33,11 +33,12 @@ public class RegisterController {
      */
     public String register(InputDTO input) throws Exception{
         try{
-            Person person = getPerson(input.getUsername());
+            InputDTO safeInput = verifier.verifyInput(input);
+            Person person = getPerson(safeInput.getUsername());
             if(person != null)
                 return "A user with the username :"+person.getUsername()+" already exists. Please try a different username.";
             else {
-                person = new Person(input.getFirstName(), input.getSurname(), input.getDateOfBirth(), input.getPassword(), input.getUsername(), dao.getRole(0));
+                person = new Person(safeInput.getFirstName(), safeInput.getSurname(), safeInput.getDateOfBirth(), safeInput.getPassword(), safeInput.getUsername(), dao.getRole(0));
                 dao.persist(person);
                 return "success";
             }
@@ -46,16 +47,10 @@ public class RegisterController {
         }
             
     }
-    
-    /**
-     * Returns a Person object from the database based on their username.
-     * @param username
-     * @return  The Person matching the username, null if none was found
-     * @throws  Exception 
-     * @see     Person
-     */
+
     public Person getPerson(String username) throws Exception{
-        return dao.getPerson(username);
+        String safeUsername = verifier.verifyInput(username, "string");
+        return dao.getPerson(safeUsername);
     }
     
 }

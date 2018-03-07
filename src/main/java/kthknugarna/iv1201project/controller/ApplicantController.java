@@ -19,6 +19,11 @@ import kthknugarna.iv1201project.model.dto.ApplicantDTO;
  * @author Jonas
  * @author Anton
  * @author Benjamin
+ * 
+ * This class is responsible for connecting the ApplicantView class with lower layers of the architecture.
+ * All calls from ApplicantView to the model and integration layers pass through here.
+ * 
+ * @see ApplicantView
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -26,18 +31,25 @@ public class ApplicantController {
     @EJB ApplicantDAO dao;
     @EJB VerificationHandler verifier;
     
+    /**
+     * Creates a new Application in the database, based on the input provided by an ApplicantDTO.
+     * @param applicant     The DTO containing the information to be used for the Application
+     * @throws Exception 
+     */
     public void createApplication(ApplicantDTO applicant) throws Exception{
-        Person person = getPerson(applicant.getUserName());
+        ApplicantDTO safeApplicant = verifier.verifyApplicant(applicant);
+        Person person = getPerson(safeApplicant.getUserName());
         Application app = new Application();
         app.setPersonId(person);
         app.setStatusId(dao.getStatus((long)0));
         dao.persist(app);
-        String from = applicant.getAvailableFrom();
-        String to = applicant.getAvailableTo();
+        String from = safeApplicant.getAvailableFrom();
+        String to = safeApplicant.getAvailableTo();
         Availability availability = new Availability(from, to);
         availability.setPersonId(person);
         dao.persist(availability);
     }
+    
     /**
      * Creates a competence profile which holds information about
      * a specific competence and the years of experience a specific

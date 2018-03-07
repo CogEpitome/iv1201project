@@ -10,7 +10,12 @@ import kthknugarna.iv1201project.model.dto.ApplicationInfoDTO;
 
 /**
  *
+ * @author Anton
  * @author Jonas
+ * @author Benjamin
+ * 
+ * Contains informaton from an Application in the database in a format usable by the view.
+ * 
  */
 public class ApplicationInfo implements ApplicationInfoDTO{
     private final long applicationId;

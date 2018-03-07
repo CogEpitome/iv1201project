@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kthknugarna.iv1201project.view;
 
 import java.io.Serializable;
@@ -26,6 +21,9 @@ import kthknugarna.iv1201project.model.dto.ApplicantDTO;
  * @author Jonas
  * @author Anton
  * @author Benjamin
+ * 
+ * The view layer class connected to the applicants.xhtml web page.
+ * @see applicants
  */
 @ManagedBean
 @SessionScoped
@@ -41,6 +39,29 @@ public class ApplicantView implements Serializable{
     
     private List<Item> items;
 
+    /**
+     * Creates a new Application based on the user's input and persists it in the database
+     */
+    public void save() {
+        try{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        
+        String user = (String)session.getAttribute("username");
+        int i = 0;
+        for(Item item : items){
+            controller.createCompetenceProfile(items.get(i).getValue(), user, BigDecimal.valueOf(items.get(i).getExperience()));
+            i++;
+        }
+        System.out.println(getAvailableFrom() + " " + getAvailableTo());
+        applicant = new Applicant(user, availableFrom, availableTo);
+        controller.createApplication(applicant);
+        } catch(Exception e){
+            ViewUtils.SetWarning("Failed to register the application! Please check the info and try to resubmit.", e.getMessage());
+        }
+    }
+    
+    
     public ApplicantController getController() {
         return controller;
     }
@@ -102,25 +123,6 @@ public class ApplicantView implements Serializable{
 
     public void remove(Item item) {
         items.remove(item);
-    }
-
-    public void save() {
-        try{
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        
-        String user = (String)session.getAttribute("username");
-        int i = 0;
-        for(Item item : items){
-            controller.createCompetenceProfile(items.get(i).getValue(), user, BigDecimal.valueOf(items.get(i).getExperience()));
-            i++;
-        }
-        System.out.println(getAvailableFrom() + " " + getAvailableTo());
-        applicant = new Applicant(user, availableFrom, availableTo);
-        controller.createApplication(applicant);
-        } catch(Exception e){
-            ViewUtils.SetWarning("Failed to register the application! Please check the info and try to resubmit.", e.getMessage());
-        }
     }
 
     public List<Item> getItems() {

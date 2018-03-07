@@ -3,6 +3,7 @@ package kthknugarna.iv1201project.model;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import kthknugarna.iv1201project.model.dto.ApplicantDTO;
 import kthknugarna.iv1201project.model.dto.InputDTO;
 import kthknugarna.iv1201project.model.exceptions.VerificationException;
 import org.jsoup.Jsoup;
@@ -76,6 +77,21 @@ public class VerificationHandler {
         String safeUsername = verifyInput(in.getUsername(), "String");
         String safePassword = verifyInput(in.getPassword(), "String");
         InputDTO safeIn = new Input(safeFirstName, safeSurname, safeEmail, safeDateOfBirth, safeUsername, safePassword);
+        return safeIn; 
+    }
+    
+    /**
+     * Used to verify all data in an ApplicantDTO object and return a validated version that is safe to use.
+     * 
+     * @param in    The ApplicantDTO to sanitize and validate.
+     * @return      A new ApplicantDTO containing the validated data.
+     * @throws      VerificationException 
+     */
+    public ApplicantDTO verifyApplicant(ApplicantDTO in) throws VerificationException {
+        String safeFromTime = verifyInput(in.getAvailableFrom(), "long");
+        String safeToTime = verifyInput(in.getAvailableTo(), "long");
+        String safeUserName = verifyInput(in.getUserName(), "String");
+        ApplicantDTO safeIn = new Applicant(safeUserName, safeFromTime, safeToTime);
         return safeIn; 
     }
     

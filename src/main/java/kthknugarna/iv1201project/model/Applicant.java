@@ -7,14 +7,16 @@ import kthknugarna.iv1201project.model.dto.ApplicantDTO;
  * @author Jonas
  * @author Anton
  * @author Benjamin
+ * 
+ * Contains the information entered by a user when creating an application.
  */
 public class Applicant implements ApplicantDTO {
     
     private final String userName;
     private final String availableFrom, availableTo;
     
-    public Applicant(String personId, String availableFrom, String availableTo){
-        this.userName = personId;
+    public Applicant(String userName, String availableFrom, String availableTo){
+        this.userName = userName;
         this.availableFrom = availableFrom;
         this.availableTo = availableTo;
     }
