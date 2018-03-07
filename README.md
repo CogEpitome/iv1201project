@@ -10,7 +10,7 @@ NetBeans 8.2 Enterprise Edition or equivalent IDE länk
 Payara Server v4.1 länk
 Git länk
 
-###Installation
+### Installation
 Download a copy of the github repository, and open it in your preferred IDE,
 the system was developed and tested in NetBeans 8.2 EE
 
