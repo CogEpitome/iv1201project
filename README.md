@@ -6,9 +6,9 @@ A recruitment system developed for the IV1201 course held at KTH, Kista.
 Follow these instructions to set up the system on your local machine.
 
 ### Prerequisites
-[NetBeans 8.2 Enterprise Edition](https://netbeans.org/downloads/) or equivalent IDE
-[Payara Server 181](https://www.payara.fish/downloads)
-[Git](https://git-scm.com/downloads)
+⋅⋅* [NetBeans 8.2 Enterprise Edition](https://netbeans.org/downloads/) or equivalent IDE
+⋅⋅* [Payara Server 181](https://www.payara.fish/downloads)
+⋅⋅* [Git](https://git-scm.com/downloads)
 
 
 
