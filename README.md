@@ -17,8 +17,8 @@ Follow these instructions to set up the system on your local machine.
 Download a copy of the github repository, and open it in your preferred IDE,
 the system was developed and tested in NetBeans 8.2 EE
 
-Install the Payara Server
-Configure the Server to include the database as a datasource named 'ApplicantDS'.
+Install the Payara Server,
+configure the Server to include the database as a datasource named 'ApplicantDS'.
 For custom configuration of the database, please see the glassfish-resources file 
 in the WEB-XML folder.
 
