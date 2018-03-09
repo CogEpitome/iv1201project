@@ -27,5 +27,11 @@ Authorization is performed by the Java class AuthorizationFilter.java in the mod
 After connecting the database and ensuring the server is set up correctly, 
 run login.xhtml to confirm successful installation.
 
+### CREATING RECRUITERS
+In the current version of the system, the easiest way to create a new person of the recruiter role is to 
+create a new account through the register page, and manually change the role of the person to 1 in the database.
+
+
+
 ## Acknowledgments
 * Hej Leif, du är rätt schysst <3
