@@ -22,7 +22,7 @@ In the lefthand menu, select Resources->JDBC->JDBC Connection Pools. Create a ne
 Now, select JDBC Resources menu and create a new resource, selecting the newly created applicantCP connection pool as data source.
 To customize the properties of the database, please see the glassfish-resources file in the WEB-INF folder. To test that the database can connect to the server, ensure that both are running and press "ping" in the admin console.
 
-Authorization is performed by the Java class AuthorizationFilter.java in the model source package. In order to edit which pages users or various roles can access, modify the doFilter method in this class. To add more roles, manually insert their name along with an incremental id in the ROLE table of the database.
+Authorization is performed by the Java class AuthorizationFilter.java in the model source package. In order to edit which pages users of various roles can access, modify the doFilter method in this class. To add more roles, manually insert their name along with an incremental id in the ROLE table of the database.
 
 After connecting the database and ensuring the server is set up correctly, 
 run login.xhtml to confirm successful installation.
